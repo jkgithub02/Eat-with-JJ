@@ -13,7 +13,11 @@ header {
   padding: 20px;
   background-color: #111;
 }
-  
+
+header h1 {
+  font-family: Arial;
+}
+
 header a {
     color: #ddd;  
 }
@@ -25,7 +29,7 @@ header a.button-link {
 
 header a.button-link:hover,
 .order a:hover { 
-    background-color: #E63946; /* Sample accent color - replace as needed */
+    background-color: #777272; /* Sample accent color - replace as needed */
 }
 
 a.button-link {
@@ -140,4 +144,27 @@ footer {
 
 .form-container button:hover {
   background-color: #ccc;
+}
+
+#hero {
+  display: flex; /* Make it a flexbox container */
+  align-items: center;  /* Align content vertically */
+  margin: 30px 0; /* Add some margin */
+}
+
+.motto-container {
+  flex: 0.65;  /* Make it take up most of the space */
+  text-align: left;  /* Align text to the left */
+  font-size: 1.5em;  /* Increase motto font size */
+  padding: 20px;   /* Add some padding for spacing */
+}
+
+.image-container {
+  flex: 0 0 200px; /* Set a fixed width for the image */
+  /* Adjust styles for your specific image here */
+}
+
+.image-container img {
+  max-width: 300%;   /* Make the image fit within the container */
+  height: auto;      /* Maintain aspect ratio */
 }
