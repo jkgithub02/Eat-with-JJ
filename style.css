@@ -1,122 +1,156 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000;
-    color: #fff;
-  }
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px; /* Increase base font size */
+  line-height: 1.6; /* Increase line spacing */
+}
   
-  header {
-    text-align: center;
-    padding: 20px;
-  }
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #111;
+}
   
-  a.button-link {
-    display: inline-block;
-    background-color: #ddd;
-    color: #000;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: color 0.3s ease; 
-  }
-  
-  a.button-link:hover {
-    background-color: #ccc;
-  }
+header a {
+    color: #ddd;  
+}
 
-  h1, h2 {
-    margin: 0;
-    padding: 0;
-  }
-  
-  main {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .menu, .order {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .menu ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .menu li {
-    margin-bottom: 5px;
-  }
-  
-  .order a {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    background-color: #ddd;
-    color: #000;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #222;
-  }
-  
-  /* Add styles for the forms */
-  .form-container {
-    background-color: #222;
-    padding: 20px;
-    border-radius: 5px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center; /* Important for text within the form */
-    max-width: 400px; /* Limit the form's width */
-    margin: 40px auto; /* Center the form horizontally and vertically */
-  }
-  
-  .form-container h2 {
-    margin-bottom: 10px;
-  }
-  
-  .form-container label {
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .form-container input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%; 
-    margin-bottom: 10px; /* Space between input boxes */ 
-    box-sizing: border-box;
-  }
+header a.button-link {
+  /* other button styles */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
 
-  .form-container button {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .form-container button {
-    background-color: #ddd;
-    color: #000;
-    cursor: pointer;
-  }
-  
-  .form-container button:hover {
-    background-color: #ccc;
-  }
-  
+header a.button-link:hover,
+.order a:hover { 
+    background-color: #E63946; /* Sample accent color - replace as needed */
+}
+
+a.button-link {
+  display: inline-block;
+  background-color: #ddd;
+  color: #000;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: color 0.3s ease; 
+}
+
+a.button-link:hover {
+  background-color: #ccc;
+}
+
+.fas.fa-shopping-cart {
+  font-size: 20px; /* Adjust font size as needed */
+  color: #fff; /* Match link color */
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.menu, .order {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 5px;
+}
+
+.order a {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background-color: #ddd;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #222;
+}
+
+/* Add styles for the forms */
+.form-container {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Important for text within the form */
+  max-width: 400px; /* Limit the form's width */
+  margin: 40px auto; /* Center the form horizontally and vertically */
+}
+
+.form-container h2 {
+  margin-bottom: 10px;
+}
+
+.form-container label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-container input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%; 
+  margin-bottom: 10px; /* Space between input boxes */ 
+  box-sizing: border-box;
+}
+
+.form-container button {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.form-container button {
+  background-color: #ddd;
+  color: #000;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #ccc;
+}
+
+.hero-section {
+  background-image: url('hero-image.jpg'); /* Replace 'hero-image.jpg' with your actual image name*/
+  background-size: cover;
+  background-position: center; 
+  height: 400px; 
+  text-align: center;
+  color: #fff;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+}
