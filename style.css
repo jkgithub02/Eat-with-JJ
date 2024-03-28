@@ -141,16 +141,3 @@ footer {
 .form-container button:hover {
   background-color: #ccc;
 }
-
-.hero-section {
-  background-image: url('hero-image.jpg'); /* Replace 'hero-image.jpg' with your actual image name*/
-  background-size: cover;
-  background-position: center; 
-  height: 400px; 
-  text-align: center;
-  color: #fff;
-  display: flex; 
-  flex-direction: column; 
-  align-items: center;
-  justify-content: center;
-}
