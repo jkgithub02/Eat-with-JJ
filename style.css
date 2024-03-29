@@ -92,54 +92,57 @@ footer {
   background-color: #222;
 }
 
-/* Add styles for the forms */
-.form-container {
-  background-color: #222;
-  padding: 20px;
-  border-radius: 5px;
-  color: #fff;
+.form-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Optional, for vertical stacking if later needed */
   align-items: center;
-  text-align: center; /* Important for text within the form */
-  max-width: 400px; /* Limit the form's width */
-  margin: 40px auto; /* Center the form horizontally and vertically */
+  justify-content: center;
+  width: 100%; /* Ensure the wrapper takes up full width */
+}
+
+.form-container {
+  background-color: #222;  /* Slightly lighter shade for contrast */
+  padding: 40px;         /* More padding for spaciousness */
+  border-radius: 8px;    /* Soften the edges */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  text-align: center;
 }
 
 .form-container h2 {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 24px;      
 }
 
 .form-container label {
-  margin-bottom: 5px;
   display: block;
-}
-
-.form-container input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 100%; 
-  margin-bottom: 10px; /* Space between input boxes */ 
-  box-sizing: border-box;
-}
-
-.form-container button {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 100%;
   margin-bottom: 10px;
 }
 
-.form-container button {
-  background-color: #ddd;
-  color: #000;
-  cursor: pointer;
+.form-container input[type="text"],
+.form-container input[type="tel"],
+.form-container input[type="address"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd; 
+  border-radius: 5px;  
+  margin-bottom: 15px; 
+  box-sizing: border-box; 
 }
 
-.form-container button:hover {
-  background-color: #ccc;
+.form-container button[type="submit"] {
+  background-color: #444; /* Darker button color */
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;    
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #555; /* Slightly darker on hover */
 }
 
 #hero {
@@ -255,7 +258,7 @@ line-height: 1.5; /* Adjust line spacing for better readability */
 
 /* container */
 .team-container {
-  max-width: 900px;
+  text-align: center;
   margin: 0 auto;
   padding: 40px 0px; 
 }
@@ -278,4 +281,18 @@ line-height: 1.5; /* Adjust line spacing for better readability */
   max-width: 100%;   /* Ensures the image scales to fit its container */
   height: auto;      /* Maintains aspect ratio */
   display: block;    /* Makes the image behave as a block element */
+}
+
+#values .container {
+  text-align: center;  /* Centers text and inline elements within the container */
+  margin: 0 auto;      /* Centers the block itself */
+  width: 100%;
+}
+
+.values-wrapper {
+  display: flex;
+  flex-direction: column;  /* Optional: For future vertical alignment */
+  align-items: center;
+  justify-content: center; 
+  width: 100%;  /* Takes up full width */
 }
