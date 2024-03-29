@@ -11,13 +11,13 @@
     <header>
     <h1>Eat with JJ</h1>
         <nav>
-        <a href="home.html" class="button-link">Home</a>
-        <a href="menu.html" class="button-link">Menu</a>
-        <a href="about.html" class="button-link">About Us</a>
-        <a href="login.html" class="button-link">Login</a>
-        <a href="signup.html" class="button-link">Sign Up</a>
-        <a href="cart.html"> <i class="fas fa-shopping-cart"></i> </a>
-        </nav> 
+        <a href="home.php" class="button-link">Home</a>
+        <a href="menu.php" class="button-link">Menu</a>
+        <a href="about.php" class="button-link">About Us</a>
+        <a href="login.php" class="button-link">Login</a>
+        <a href="signup.php" class="button-link">Sign Up</a>
+        <a href="cart.php"> <i class="fas fa-shopping-cart"></i> </a>
+        </nav>
 
         <nav id="menu-categories">
             <button data-category="all" class="active">All</button>
