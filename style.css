@@ -51,10 +51,6 @@ a.button-link:hover {
   color: #fff; /* Match link color */
 }
 
-h1, h2 {
-  margin: 0;
-  padding: 0;
-}
 
 main {
   padding: 20px;
@@ -245,4 +241,41 @@ line-height: 1.5; /* Adjust line spacing for better readability */
   display: block;
   margin: 0 auto;
   object-fit: contain; /* Or object-fit: contain */
+}
+
+/* about-hero */
+#about-hero {
+  background-image: url("assets/pasta/bolognese.jpeg"); /* Replace with a suitable image */
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 80px 20px;
+  color: #fff; 
+}
+
+/* container */
+.team-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 0px; 
+}
+
+
+/* team-profiles */
+.team-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.profile {
+  width: 30%; /* Adjust for 2 or 3 columns */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile img {
+  max-width: 100%;   /* Ensures the image scales to fit its container */
+  height: auto;      /* Maintains aspect ratio */
+  display: block;    /* Makes the image behave as a block element */
 }
