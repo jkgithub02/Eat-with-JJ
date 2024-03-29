@@ -3,20 +3,20 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
---admin table
-CREATE TABLE admin(
-    aid INT NOT NULL PRIMARY KEY, --admin id
-    username VARCHAR(50) NOT NULL UNIQUE, --admin username
+-- admin table
+CREATE TABLE admin (
+    aid INT NOT NULL PRIMARY KEY, 
+    username VARCHAR(50) NOT NULL UNIQUE, 
     password VARCHAR(255) NOT NULL
-)
+);
 
 INSERT INTO admin(aid, username, password) VALUES
 (1, "admin123", "admin123");
 
+
 -- User Table
 CREATE TABLE user (
-    uid INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    uid INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(222) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE food(
     foodname VARCHAR(100) NOT NULL,
     description TEXT, 
     price DECIMAL(10,2) NOT NULL,
-    img VARCHAR(222) NOT NULL;
+    img VARCHAR(222) NOT NULL,
     FOREIGN KEY (fcid) REFERENCES foodcat(fcid)
 );
 
@@ -70,18 +70,17 @@ INSERT INTO food(fid, fcid, foodname, description, price, img) VALUES
 (20, 4, "Hibiscus Tea", "Lorem Ipsum", "5.00", "hibtea.jpeg");
 
 
-
-CREATE TABLE order (
-  oid int NOT NULL PRIMARY KEY,
-  uid int NOT NULL,
-  fid int NOT NULL,
-  foodname varchar(222) NOT NULL,
-  quantity int NOT NULL,
-  price decimal(10,2) NOT NULL,
-  status varchar(222) DEFAULT NULL,
-  date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-  FOREIGN KEY (uid) REFERENCES user(uid)
-  FOREIGN KEY (fid) REFERENCES food(uid)
+CREATE TABLE orders ( 
+  oid INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+  uid INT NOT NULL,
+  fid INT NOT NULL,
+  foodname VARCHAR(222) NOT NULL,
+  quantity INT NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  status VARCHAR(222) DEFAULT NULL,
+  date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (uid) REFERENCES user(uid),
+  FOREIGN KEY (fid) REFERENCES food(fid) 
 );
 
 COMMIT; 
