@@ -153,7 +153,7 @@ footer {
 }
 
 .motto-container {
-  flex: 0.65;  /* Make it take up most of the space */
+  flex: 0.6555;  /* Make it take up most of the space */
   text-align: left;  /* Align text to the left */
   font-size: 1.5em;  /* Increase motto font size */
   padding: 20px;   /* Add some padding for spacing */
@@ -167,4 +167,82 @@ footer {
 .image-container img {
   max-width: 300%;   /* Make the image fit within the container */
   height: auto;      /* Maintain aspect ratio */
+}
+
+.testimonials-wrapper {
+  display: flex;
+  justify-content: center; /* Center the testimonials horizontally */
+  align-items: center;     /* Center the testimonials vertically */
+  width: 100%;            /* Container takes up full width */
+  padding: 20px;          /* Add some padding around the container */
+}
+
+.testimonials {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #000; /* Black background */
+  color: #fff; /* White text for readability */
+  margin: 0 auto;  /* Center horizontally */
+}
+
+.testimonials h2 {
+  margin-bottom: 30px;
+  font-family: sans-serif;
+  font-weight: 300;
+}
+
+.testimonial {
+  padding: 20px;
+  border: none;
+  margin-bottom: 20px;
+  background-color: #1a1a1a; /* Darker gray background for testimonials */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial p {
+line-height: 1.5; /* Adjust line spacing for better readability */
+}
+
+.heading-container {
+  display: flex;           
+  justify-content: center; /* Centers the heading */
+  width: 100%;             /* Container takes full width */
+} 
+
+.carousels-container {
+  display: flex;        /* Make the container a flexbox row */
+  justify-content: space-around;  /* Distribute carousels with space*/
+  flex-wrap: wrap;      /* Allow carousels to wrap if the screen is narrow */
+  width: 100%; 
+  padding: 20px 0;      /* Add padding above and below carousels */
+}
+
+.carousel {
+  width: 40%; /* Adjust width as needed */
+  max-height: 400px;
+  margin: 30px auto;
+  position: relative;                         
+  overflow: visible;                          
+}
+
+.carousel-slides {                      
+  display: flex;                              
+  overflow-x: auto; 
+  scroll-snap-type: x mandatory;  
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* For touch devices */
+  list-style-type: none; /* Removes bullet points */
+}
+
+.carousel-slide {                                 
+  flex-shrink: 0;                            
+  width: 100%; /* All slides same width */
+  scroll-snap-align: center;          
+}
+
+.carousel-slide img {                       
+  max-height: 400px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain; /* Or object-fit: contain */
 }
