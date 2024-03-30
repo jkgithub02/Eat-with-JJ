@@ -122,7 +122,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['fid
                         <td>RM<?= $subtotal ?></td>
                         <td>
                             <button class="update-quantity">-</button>
-                            <button class="remove-item">Remove</button>
+                            <button class="remove-item" data-fid="<?= $item['fid'] ?>">Remove</button>
                         </td>
                     </tr>
                     <?php } ?>
