@@ -1,6 +1,8 @@
 <?php
 include('header.php');   
 session_start();
+  include ('connection.php');
+ ?>
 
 // Login Protection
 if (!isset($_SESSION['user_id'])) {

@@ -1,8 +1,9 @@
 <?php
 session_start();
+include ('connection.php');
 
 $foodId = $_POST['fid'] ?? null;
-$quantity = $_POST['quantity'] ?? 1; 
+$quantity = $_POST['quantity'] ?? 1;
 
 if ($foodId) {
     // Sanitize input (you should do more thorough validation)
@@ -14,9 +15,10 @@ if ($foodId) {
         $_SESSION['cart'] = [];
     }
 
-    $_SESSION['cart'][$foodId] = $quantity; 
+    $_SESSION['cart'][$foodId] = $quantity;
 
     echo json_encode(['status' => 'success']);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid food ID']);
 }
+?>

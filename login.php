@@ -1,3 +1,9 @@
+<?php
+ // Database connection (replace with your connection details)
+ session_start();
+  // error_reporting(0);
+  include ('connection.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
@@ -27,8 +33,6 @@
   </main>
 
   <?php
-  session_start(); // Start a session for managing user login
-  include ('connection.php'); // Assuming your database connection file
   
   if (isset($_POST['username']) && isset($_POST['password'])) {
 
@@ -48,6 +52,7 @@
 
       if (password_verify($password, $row['password'])) {
         // Successful login 
+        $_SESSION['logged_in'] = true;  // Use the correct flag name
         $_SESSION['user_id'] = $row['uid']; // Store user ID in session
         // Redirect to a logged-in area 
         header("Location: menu.php"); // Assuming you want to redirect to home
