@@ -1,3 +1,9 @@
+<?php
+ // Database connection (replace with your connection details)
+ session_start();
+  // error_reporting(0);
+  include ('connection.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
@@ -55,10 +61,8 @@
   </main>
 
   <?php
-  // Database connection (replace with your connection details)
-  session_start();
-  // error_reporting(0);
-  include ('connection.php');
+ 
+ 
 
   // Form Submission Check
   if (isset($_POST['name']) && isset($_POST['phone']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm_password']) && isset($_POST['username'])) {

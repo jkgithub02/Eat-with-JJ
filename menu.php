@@ -1,3 +1,9 @@
+<?php
+ // Database connection (replace with your connection details)
+ session_start();
+  // error_reporting(0);
+  include ('connection.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
@@ -29,8 +35,6 @@
     <main>
         <div class="menu-container">
             <?php
-            // Database connection (replace with your credentials)
-            include ('connection.php');
 
             // Fetch all food items (you might want to modify this later for filtering)
             $sql = "SELECT * FROM food";
