@@ -18,6 +18,7 @@ if (!isset($_SESSION['cart'])) {
 // Handling 'Add to Cart' action
 if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
     $fid = intval($_GET['fid']); // Sanitize input
+    $quantity = intval($_GET['quantity']);
 
     // Fetch food details
     $sql = "SELECT * FROM food WHERE fid = ?";
@@ -45,7 +46,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
                 'fid' => $row['fid'],
                 'foodname' => $row['foodname'],
                 'price' => $row['price'],
-                'quantity' => 1 
+                'quantity' => $quantity
             );
         }
 
@@ -74,6 +75,45 @@ if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['fid
 
     echo "error: item not found"; // Handle the case where the item is not found
 }
+
+if (isset($_POST['action']) && $_POST['action'] == 'decrease' && isset($_POST['fid'])) {
+    $fid = intval($_POST['fid']); // Sanitize input
+
+    // Find the item in the cart
+    for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+        if ($_SESSION['cart'][$i]['fid'] == $fid) {
+            // Decrease quantity if it's greater than 1
+            if ($_SESSION['cart'][$i]['quantity'] > 1) {
+                $_SESSION['cart'][$i]['quantity']--;
+                echo "success"; // Return success response
+            } else {
+                echo "error: minimum quantity"; // Example error response
+            }
+            exit; // Stop further processing
+        }
+    }
+
+    // Handle the case where the item is not found
+    echo "error: item not found";
+} 
+
+if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['fid'])) {
+    $fid = intval($_POST['fid']); 
+
+    // Find the item in the cart
+    for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+        if ($_SESSION['cart'][$i]['fid'] == $fid) {
+            // Increase quantity 
+            $_SESSION['cart'][$i]['quantity']++; 
+            echo "success"; 
+            exit; 
+        }
+    }
+
+    // Handle the case where the item is not found
+    echo "error: item not found";
+} 
+
 
 ?>
 
@@ -121,7 +161,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['fid
                         <td><?= $item['quantity'] ?></td>
                         <td>RM<?= $subtotal ?></td>
                         <td>
-                            <button class="update-quantity">-</button>
+                            <button class="increase-quantity" data-fid="<?= $item['fid'] ?>">+</button>
+                            <button class="decrease-quantity" data-fid="<?= $item['fid'] ?>">-</button>
                             <button class="remove-item" data-fid="<?= $item['fid'] ?>">Remove</button>
                         </td>
                     </tr>
@@ -142,6 +183,5 @@ if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['fid
     <footer>
         <p>&copy; Eat with JJ 2024</p>
     </footer>
-    <script src="scripts.js"></script>
 </body>
 </html>
