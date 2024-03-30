@@ -9,9 +9,8 @@ $(document).ready(function() {
 
     // Remove item button click handler
     $('.remove-item').click(function() {
-        var row = $(this).closest('tr');
-        var fid = row.find('td:first-child').text(); 
-        updateCartItem(fid, 'remove');
+        var fid = $(this).data('fid');
+        removeFromCart(fid)
     });
 
     $('.add-to-cart').click(function() {
@@ -19,18 +18,18 @@ $(document).ready(function() {
         addToCart(fid);  // Call function to add to cart
     });
 
-    // updateCartItem function (same as before)
-    function updateCartItem(fid, action) {
+    function removeFromCart(fid) { // Pass the food ID as an argument
         $.ajax({
-            url: "updatecart.php", // Send request to a separate script for cart updates
-            type: "POST",
-            data: { fid: fid, action: action },
+            url: "cart.php",
+            type: "POST", // Use POST for modifying data (like removing)
+            data: { fid: fid, action: 'remove' },
             success: function(response) {
                 if (response === 'success') {
-                    // Update cart display on success
-                    location.reload(); // Simplest approach, reloads the entire page
+                    // Successful removal, update the cart display
+                    location.reload(); // Simplest approach, but you can improve this
+    
                 } else {
-                    alert("Error updating cart: " + response);
+                    alert("Error removing item from cart: " + response);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {

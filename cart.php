@@ -59,6 +59,22 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
     }
 }
 
+if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['fid'])) {
+    $fid = intval($_POST['fid']); 
+
+    // Find the item in the cart
+    for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+        if ($_SESSION['cart'][$i]['fid'] == $fid) {
+            unset($_SESSION['cart'][$i]); // Remove the item
+            $_SESSION['cart'] = array_values($_SESSION['cart']); // Reindex the array
+            echo "success"; // Return success response
+            exit;
+        }
+    }
+
+    echo "error: item not found"; // Handle the case where the item is not found
+}
+
 ?>
 
 <!DOCTYPE html>
