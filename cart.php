@@ -1,94 +1,131 @@
 <?php
-    include('header.php');   
-    session_start();
-    include ('connection.php');
-?>
+// Enable error reporting for development
+error_reporting(E_ALL); 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-// Login Protection
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php'); 
-    exit();
+// Database connection (replace with your credentials)
+include('connection.php');
+
+// Start the session for cart management 
+session_start();
+
+// Initialize the cart if it's empty
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
 }
 
-// Database Connection (replace with your credentials)
-include ('connection.php'); 
+// Handling 'Add to Cart' action
+if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
+    $fid = intval($_GET['fid']); // Sanitize input
 
-// Retrieve Cart from Session
-$cart = $_SESSION['cart'] ?? [];
-
-// Fetch Real Food Data from Database
-if (!empty($cart)) {
-    $foodIds = array_keys($cart); 
-    $placeholders = str_repeat('?,', count($foodIds) - 1) . '?';
-    $sql = "SELECT fid, foodname, price FROM food WHERE fid IN ($placeholders)";
+    // Fetch food details
+    $sql = "SELECT * FROM food WHERE fid = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param(str_repeat('i', count($foodIds)), ...$foodIds); 
+    $stmt->bind_param("i", $fid);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $foodDetails = [];
-    while ($row = $result->fetch_assoc()) {
-        $foodDetails[$row['fid']] = $row; 
-    }
-} 
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
 
-// Calculate Total
-$total = 0;
-foreach ($cart as $itemId => $quantity) {
-    if (isset($foodDetails[$itemId])) {
-        $subtotal = $foodDetails[$itemId]['price'] * $quantity;
-        $total += $subtotal;
+        // Check if item is already in cart
+        $itemFound = false;
+        for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+            if ($_SESSION['cart'][$i]['fid'] == $fid) {
+                $_SESSION['cart'][$i]['quantity']++;
+                $itemFound = true;
+                break; 
+            }
+        }
+
+        // If not already existing, add it as a new item
+        if (!$itemFound) {
+            $_SESSION['cart'][] = array(
+                'fid' => $row['fid'],
+                'foodname' => $row['foodname'],
+                'price' => $row['price'],
+                'quantity' => 1 
+            );
+        }
+
+        // Redirect to cart to show updated state
+        header("Location: cart.php"); 
+        exit; 
+
+    } else {
+        // Handle the case where the food item is not found
+        echo "Invalid food item"; 
     }
 }
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="scripts.js"></script>
     <title>Your Cart</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
-    <h1>Your Shopping Cart</h1>
+    <?php include('header.php'); ?>
+    <main>
+        <h1>Your Shopping Cart</h1>
 
-    <?php if (empty($cart)) : ?>
-        <p>Your cart is empty.</p>
-    <?php else : ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Food Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($cart as $itemId => $quantity) : ?>
-                    <?php if (isset($foodDetails[$itemId])) : ?>
-                        <tr>
-                            <td><?php echo $foodDetails[$itemId]['foodname']; ?></td>
-                            <td><?php echo $quantity; ?></td> 
-                            <td>RM<?php echo number_format($foodDetails[$itemId]['price'], 2); ?></td>
-                            <td>RM<?php echo number_format($foodDetails[$itemId]['price'] * $quantity, 2); ?></td>
-                        </tr>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">Total:</td>
-                    <td>RM<?php echo number_format($total, 2); ?></td>
-                </tr>
-            </tfoot>
-        </table>
+        <?php
+        if (empty($_SESSION['cart'])) {
+            echo "<p>Your cart is empty.</p>";
+        } else {
+            ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $total = 0;
+                    foreach ($_SESSION['cart'] as $item) { 
+                        $subtotal = $item['price'] * $item['quantity'];
+                        $total += $subtotal;
+                    ?>
+                    <tr>
+                        <td><?= $item['foodname'] ?></td>
+                        <td>RM<?= $item['price'] ?></td>
+                        <td><?= $item['quantity'] ?></td>
+                        <td>RM<?= $subtotal ?></td>
+                        <td>
+                            <button class="update-quantity">-</button>
+                            <button class="remove-item">Remove</button>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total:</td>
+                        <td>RM<?= $total ?></td>
+                    </tr>
+                </tfoot>
+            </table>
 
-        <form action="checkout.php" method="POST">
-            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">  
-            <button type="submit">Checkout</button>
-        </form>
-    <?php endif; ?>
+            <a href="checkout.php" class="button">Proceed to Checkout</a> 
+        <?php } ?>           
+
+    </main>
+    <footer>
+        <p>&copy; Eat with JJ 2024</p>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>
