@@ -1,7 +1,7 @@
 <?php
-include('header.php');   
-session_start();
-include ('connection.php');
+    include('header.php');   
+    session_start();
+    include ('connection.php');
 ?>
 
 // Login Protection

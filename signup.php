@@ -1,9 +1,9 @@
 <?php
- // Database connection (replace with your connection details)
- session_start();
+  // Database connection (replace with your connection details)
+  session_start();
   // error_reporting(0);
   include ('connection.php');
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
