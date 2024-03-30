@@ -1,17 +1,17 @@
-const menuCategories = document.getElementById('menu-categories');
-const menuSections = document.querySelectorAll('.menu-section');
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
 
-menuCategories.addEventListener('click', (event) => {
-    const selectedCategory = event.target.dataset.category;
+addToCartButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const itemId = button.dataset.itemId;
+    const quantityInput = button.parentNode.querySelector('.quantity-input');
+    const quantity = quantityInput.value;
 
-   // Hide all menu sections
-   menuSections.forEach(section => {
-       section.style.display = 'none';
-   });
+    // Simplified temporary cart handling (you'll need more robust logic later)
+    let cart = localStorage.getItem('cart') || '[]';
+    cart = JSON.parse(cart); 
+    cart.push({ itemId, quantity });
+    localStorage.setItem('cart', JSON.stringify(cart));
 
-   // Show the selected section
-   if (selectedCategory) {
-     const activeSection = document.querySelector(`[data-category="${selectedCategory}"]`);
-     activeSection.style.display = 'block'; // Or use another display type if needed
-   }
+    // Provide feedback to the user (e.g., "Item added to cart!" message)
+  });
 });
