@@ -15,6 +15,36 @@ if (empty($_SESSION['cart'])) {
     header("Location: cart.php"); // Redirect to cart if empty
     exit;
 }
+
+
+$userId = $_SESSION['user_id'];
+
+// 1. Fetch User Data 
+$sql = "SELECT * FROM user WHERE uid = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows !== 1) {
+    // Handle the case where the user is not found (unlikely if the session is valid)
+    echo "User data not found.";
+    exit();
+}
+
+$user = $result->fetch_assoc();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Input Validation 
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $address = $_POST['address'] ?? '';
+    $newPassword = $_POST['newPassword'] ?? '';
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
+
+    $errors = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +103,31 @@ if (empty($_SESSION['cart'])) {
     </main>
     <div class="checkout-form">
         <h2>Billing Details</h2>
+        <section class="form-wrapper">
+        <section class="form-container">
+            <form method="POST" action="profile.php">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>"
+                    required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"
+                    required><br><br>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone"
+                    value="<?php echo htmlspecialchars($user['phone']); ?>"><br><br>
+
+                <label for="address">Address:</label>
+                <input type="address" id="address"
+                    name="address" value="<?php echo htmlspecialchars($user['address']); ?>" ><br><br>
+
+                <button type="save-order-details">Save Details for This Order</button>
+                <p>These details will only be saved for this order.</p>
+                <p>If you would like to change your permanenetly change your details, please change them on the profile page.</p>
+            </form>
+        </section>
+        </section>
     </div>
     <div class="payment-section">
         <h2>Payment Options</h2>

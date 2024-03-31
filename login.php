@@ -2,7 +2,7 @@
   // Database connection (replace with your connection details)
   session_start();
   // error_reporting(0);
-  include ('connection.php');
+  include ('connection.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
