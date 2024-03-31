@@ -299,11 +299,12 @@ footer {
 
 .carousel-slide img {
   padding-top: 10px;
-  max-width: 72%; 
+  max-width: 72%;
   height: auto;
   display: block;
   margin: 0 auto;
-  border-radius: 8px; /* Adds a gentle curve to image corners */
+  border-radius: 8px;
+  /* Adds a gentle curve to image corners */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   object-fit: contain;
   /* Or object-fit: contain */
@@ -386,7 +387,7 @@ footer {
   border-radius: 5%;
 }
 
-.menu-item h3{
+.menu-item h3 {
   border: 2px solid #ddd;
   border-radius: 5px;
   border-width: 69%;
@@ -403,4 +404,15 @@ footer {
   border-radius: 3%;
   border: 3px;
   border-color: #ccc;
+}
+
+.msg {
+  padding-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 50px;
 }

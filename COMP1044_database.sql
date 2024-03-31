@@ -10,8 +10,9 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL
 );
 
+--password is admin123, password hashing used here
 INSERT INTO admin(aid, username, password) VALUES
-(1, "admin123", "admin123");
+(1, "admin123", "$2y$10$alp7ZWTEoEg.Qzk9e6MTCuai1VsYkhhnCGAl46rBPqYL.a52y3vjG");
 
 
 -- User Table

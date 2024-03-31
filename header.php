@@ -6,6 +6,7 @@
       <a href="menu.php" class="button-link">Menu</a>
       <a href="about.php" class="button-link">About Us</a>
       <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
+        <a href="profile.php" class="button-link">Profile</a>
         <a href="logout.php" class="button-link">Logout</a>
       <?php else: ?>
         <a href="login.php" class="button-link">Login</a>

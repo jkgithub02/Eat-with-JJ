@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <title>Admin Login</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
-
+    
                     <button type="submit">Login</button>
                 </form>
             </section>
