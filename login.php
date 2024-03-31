@@ -54,6 +54,8 @@
         // Successful login 
         $_SESSION['logged_in'] = true;  // Use the correct flag name
         $_SESSION['user_id'] = $row['uid']; // Store user ID in session
+
+        $_SESSION['user_logged_in'] = true;
         // Redirect to a logged-in area 
         header("Location: menu.php"); // Assuming you want to redirect to home
         exit();

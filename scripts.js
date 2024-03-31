@@ -16,6 +16,11 @@ $(document).ready(function() {
     });
 
     $('.add-to-cart').click(function() {
+        if (!isLoggedIn()) { // Assuming you have an 'isLoggedIn' function
+            alert("Please log in to add items to your cart.");
+            return; // Stop the button's default action
+        }
+
         var fid = $(this).data('fid'); // Get food ID from the button
         var quantity = $(this).closest('.menu-item').find('.quantity').val();
         addToCart(fid,quantity);  // Call function to add to cart
@@ -96,6 +101,18 @@ $(document).ready(function() {
         });
     }
 
+    function isLoggedIn() {
+        let loggedIn = false;
+        $.ajax({
+            url: "check_login.php", 
+            type: "GET",
+            async: false, // Make the AJAX request synchronous
+            success: function(response) {
+                if (response === 'true') {
+                    loggedIn = true;
+                }
+            }
+        });
+        return loggedIn;
+    }
 });
-
-
