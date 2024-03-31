@@ -1,0 +1,221 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 80px;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+    /* Increase base font size */
+    line-height: 1.6;
+    /* Increase line spacing */
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+}
+
+header h1 {
+    font-family: Arial;
+}
+
+header a {
+    color: #ddd;
+    padding: 10px;
+}
+
+header a.button-link {
+    /* other button styles */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+header a.button-link:hover,
+.order a:hover {
+    background-color: #777272;
+    /* Sample accent color - replace as needed */
+}
+
+a.button-link {
+    display: inline-block;
+    background-color: #ddd;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: color 0.3s ease;
+}
+
+a.button-link:hover {
+    background-color: #ccc;
+}
+
+.fas.fa-shopping-cart {
+    font-size: 20px;
+    /* Adjust font size as needed */
+    color: #fff;
+    /* Match link color */
+    padding-left: 10px;
+}
+
+.button {
+    background-color: #4CAF50;
+    /* Example: Green background */
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    /* Slightly rounded corners */
+    cursor: pointer;
+    text-decoration: none;
+    /* Remove underline if buttons are links */
+}
+
+
+/* Optional hover effect */
+.button:hover {
+    background-color: #45a049;
+    /* Slightly darker green on hover */
+}
+
+.button.delete {
+    background-color: #f44336;
+    /* Red background */
+    color: white;
+    /* White text for contrast */
+}
+
+.button.delete:hover {
+    background-color: #da190b;
+    /* Darker red on hover */
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.welcome-message{
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.welcome-message p1 {
+    display: inline-block;
+    padding-left: 100%;  /* Start the text off-screen */
+    animation: marquee 15s linear infinite; /* Animation details below */
+}
+
+@keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); } 
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Optional, for vertical stacking if later needed */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 20px;
+    /* Ensure the wrapper takes up full width */
+}
+
+.form-container {
+    background-color: #222;
+    /* Slightly lighter shade for contrast */
+    padding: 40px;
+    /* More padding for spaciousness */
+    border-radius: 8px;
+    /* Soften the edges */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow */
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container input[type="file"],
+.form-container textarea,
+.form-container select,
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.form-container select option {
+    text-align: center;
+    font-weight: 50px;
+    font-style: bold;
+}
+
+
+.form-container button[type="submit"] {
+    background-color: #444;
+    /* Darker button color */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth transition */
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #555;
+    /* Slightly darker on hover */
+}
+
+
+/*admin tables*/
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    /* Center the table */
+}
+
+th,
+td {
+    border: 3px solid #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    text-align: center;
+}
+
+.add-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
