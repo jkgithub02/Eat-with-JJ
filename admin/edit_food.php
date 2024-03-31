@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Redirect with JavaScript - Include the pop-up message
                     echo
                         "<script>
-                        alert('Food item update successfully!');
+                        alert('Food item updated successfully!');
                         window.location.href = 'edit_menu.php';
                     </script>";
                     exit();
