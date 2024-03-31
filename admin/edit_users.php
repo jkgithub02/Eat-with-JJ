@@ -1,13 +1,20 @@
 <?php
 session_start();
-include ('connection.php');
+include ('../connection.php');
 
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+// Access Control: Only allow logged-in admins
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: index.php');
     exit();
 }
 
-$userId = $_SESSION['user_id'];
+
+$userId = (int) $_GET['id'];
+
+if (!$userId) {
+    header('Location: manage_users.php');
+    exit();
+}
 
 // 1. Fetch User Data 
 $sql = "SELECT * FROM user WHERE uid = ?";
@@ -17,7 +24,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows !== 1) {
-    // Handle the case where the user is not found (unlikely if the session is valid)
     echo "User data not found.";
     exit();
 }
@@ -26,6 +32,7 @@ $user = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Input Validation 
+    $username = $_POST['username'] ?? '';
     $name = $_POST['name'] ?? '';
     $email = $_POST['email'] ?? '';
     $phone = $_POST['phone'] ?? '';
@@ -46,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Update Logic (If validation passed)
     if (empty($errors)) {
-        $sql = "UPDATE user SET name = ?, email = ?, phone = ?, address = ?";
+        $sql = "UPDATE user SET username = ?, name = ?, email = ?, phone = ?, address = ?"; // Adapt column names
 
         if (!empty($newPassword)) {
             $sql .= ", password = ?"; // Add password update
@@ -57,38 +64,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($sql);
 
         if (!empty($newPassword)) {
-            $stmt->bind_param("sssssi", $name, $email, $phone, $address, $hashedPassword, $userId); 
+            $stmt->bind_param('ssssssi', $username, $name, $email, $phone, $address, $hashedPassword, $userId);
         } else {
-        
+
             // This is the only bind_param needed for updates without password change
-            $stmt->bind_param("ssssi", $name, $email, $phone, $address, $userId); 
+            $stmt->bind_param("sssssi",$username, $name, $email, $phone, $address, $userId);
         }
 
         if ($stmt->execute()) {
-            echo
-                "<script>
-                alert('Details updated successfully!');
-                window.location.href = 'menu.php';
-            </script>";
+            echo "<script>
+                alert('User details updated successfully!');
+                window.location.href = 'manage_users.php'; 
+              </script>";
             exit();
         } else {
-            $errorMessage = "Error updating profile. Please try again.";
+            $errorMessage = "Error updating user profile. Please try again.";
         }
     }
 }
 
-
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
-    <?php include ('header.php'); ?>
+    <header>
+        <h1>Edit User Details</h1>
+    </header>
 
     <?php if (isset($successMessage)): ?>
         <p style="color: green;">
@@ -100,12 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php echo $errorMessage; ?>
         </p>
     <?php endif; ?>
-    <div class="msg">
-        <p>Edit your profile</p>
-    </div>
+
     <section class="form-wrapper">
         <section class="form-container">
-            <form method="POST" action="profile.php">
+            <form method="POST" action="edit_users.php?id=<?php echo $user['uid']; ?>">
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>"
+                    required><br><br>
+
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>"
                     required><br><br>
@@ -132,9 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </section>
     </section>
-    <footer>
-        <p>&copy; Eat with JJ 2024</p>
-    </footer>
+
 </body>
 
 </html>
