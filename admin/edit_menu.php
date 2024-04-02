@@ -68,8 +68,7 @@ $result = $conn->query($sql);
                         </td>
                         <td>
                             <a href="edit_food.php?id=<?php echo $row['fid']; ?>" class="button">Edit</a>
-                            <a href="?delete_id=<?php echo $row['fid']; ?>" class="button delete"
-                                onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                            <a href="?delete_id=<?php echo $row['fid']; ?>" class="button delete">Delete</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
