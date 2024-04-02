@@ -10,7 +10,7 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL
 );
 
---password is admin123, password hashing used here
+-- password is admin123, password hashing used here
 INSERT INTO admin(aid, username, password) VALUES
 (1, "admin123", "$2y$10$alp7ZWTEoEg.Qzk9e6MTCuai1VsYkhhnCGAl46rBPqYL.a52y3vjG");
 
@@ -71,6 +71,16 @@ INSERT INTO food(fid, fcid, foodname, description, price, img) VALUES
 (20, 4, "Hibiscus Tea", "Lorem Ipsum", "5.00", "hibtea.jpeg");
 
 
+CREATE TABLE stat (
+    sid INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    detail VARCHAR(222) NOT NULL
+);
+
+INSERT INTO stat (sid, detail) VALUES
+(1, "Preparing.."),
+(2, "Completed");
+
+
 CREATE TABLE orders ( 
   oid INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
   uid INT NOT NULL,
@@ -78,11 +88,13 @@ CREATE TABLE orders (
   foodname VARCHAR(222) NOT NULL,
   quantity INT NOT NULL,
   price DECIMAL(10,2) NOT NULL,
-  status VARCHAR(222) DEFAULT NULL,
-  date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  sid INT NOT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
   FOREIGN KEY (uid) REFERENCES user(uid),
-  FOREIGN KEY (fid) REFERENCES food(fid) 
+  FOREIGN KEY (fid) REFERENCES food(fid),
+  FOREIGN KEY (sid) REFERENCES stat(sid)
 );
+
 
 COMMIT; 
 
