@@ -16,13 +16,13 @@ if (empty($_SESSION['cart'])) {
     exit;
 }
 
+// Assuming you know the user's ID
+$user_id = $_SESSION['user_id'];  // (Or however you retrieve the user ID)
 
-$userId = $_SESSION['user_id'];
-
-// 1. Fetch User Data 
+// Prepare the query
 $sql = "SELECT * FROM user WHERE uid = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $userId);
+$stmt->bind_param('i', $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -32,19 +32,30 @@ if ($result->num_rows !== 1) {
     exit();
 }
 
+// Get the result
 $user = $result->fetch_assoc();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Input Validation 
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    $address = $_POST['address'] ?? '';
-    $newPassword = $_POST['newPassword'] ?? '';
-    $confirmPassword = $_POST['confirmPassword'] ?? '';
+// Retrieve order data
+$orderData = json_decode(file_get_contents('php://input'), true);
 
-    $errors = [];
+// Prepare the SQL query
+$sql = "INSERT INTO orders (uid, fid, foodname, quantity, price, sid, date) VALUES (?, ?, ?, ?, ?, 1, ?)";
+$stmt = $conn->prepare($sql);
+
+
+if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+
+    $cartItems = $_SESSION['cart'];
+    // Now you can proceed with your foreach loop
+    foreach ($cartItems as $item) {
+        $stmt->bind_param('iisids', $user_id, $item['fid'], $item['foodname'], $item['quantity'], $item['price'], $orderData['date']);
+        $stmt->execute();
+    }
+
+} else {
+    echo "Cart is empty or invalid";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="scripts.js"></script>
     <title>Eat with JJ - Checkout</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
@@ -105,26 +115,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Billing Details</h2>
         <section class="form-wrapper">
         <section class="form-container">
-            <form method="POST" action="profile.php">
+            <form method="POST" action="checkout.php">
                 <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>"
-                    required><br><br>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>" required><br><br>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>"
-                    required><br><br>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required><br><br>
 
                 <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone"
-                    value="<?php echo htmlspecialchars($user['phone']); ?>"><br><br>
+                <input type="tel" id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>"><br><br>
 
                 <label for="address">Address:</label>
-                <input type="address" id="address"
-                    name="address" value="<?php echo htmlspecialchars($user['address']); ?>" ><br><br>
+                <input type="address" id="address" name="address" value="<?php echo htmlspecialchars($user['address']); ?>" ><br><br>
 
-                <button type="save-order-details">Save Details for This Order</button>
+                <button type="button" id="save-order-details">Save Details for This Order</button>
+                <p id="save-details-feedback"></p>
                 <p>These details will only be saved for this order.</p>
                 <p>If you would like to change your permanenetly change your details, please change them on the profile page.</p>
+                <p>A receipt will be printed for this order.</p>
             </form>
         </section>
         </section>
@@ -132,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="payment-section">
         <h2>Payment Options</h2>
             </div>
-    <button class="place-order">Place Order</button> 
+    <button class="place-order" id="place-order-button">Place Order</button> 
     <footer>
         <p>&copy; Eat with JJ 2024</p>
     </footer>

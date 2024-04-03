@@ -416,3 +416,8 @@ footer {
   font-weight: bold;
   font-size: 50px;
 }
+
+#save-details-feedback {
+  font-weight: bold;
+  margin-top: 10px; 
+}

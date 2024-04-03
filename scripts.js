@@ -1,3 +1,6 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Cart Functionality
+
 $(document).ready(function() {
     $('.decrease-quantity').click(function() {
         var fid = $(this).data('fid');
@@ -116,3 +119,101 @@ $(document).ready(function() {
         return loggedIn;
     }
 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Checkout Functionality
+
+// Inside your existing 'save-order-details' button click handler
+function saveOrderDetailsLocally() {
+    const orderData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      address: document.getElementById('address').value 
+    };
+  
+    // Store in local storage
+    localStorage.setItem('orderDetails', JSON.stringify(orderData)); 
+
+    // Show feedback message
+    const feedbackElement = document.getElementById('save-details-feedback');
+    feedbackElement.textContent = "Details Saved!";
+    feedbackElement.style.color = "green"; // Optional: style for success
+
+    // Clear feedback after a few seconds
+    setTimeout(function() {
+        feedbackElement.textContent = "";
+    }, 3000); // 3 seconds delay
+}
+
+// Function to load from local storage (call on page load or when needed)
+function loadOrderDetails() {
+    const storedData = localStorage.getItem('orderDetails');
+    if (storedData) {
+      const orderData = JSON.parse(storedData);
+      document.getElementById('name').value = orderData.name;
+      document.getElementById('email').value = orderData.email;
+      ocument.getElementById('phone').value = orderData.phone;
+      ocument.getElementById('address').value = orderData.address;
+    }
+}  
+
+// Get the button element
+const saveButton = document.getElementById('save-order-details');
+
+// Add click event listener 
+saveButton.addEventListener('click', saveOrderDetailsLocally);
+
+// Load details on page load (optional)
+window.addEventListener('load', loadOrderDetails); 
+
+
+const placeOrderButton = document.getElementById('place-order-button');
+placeOrderButton.addEventListener('click', submitOrder);
+
+function submitOrder() {
+    // Cart items - simplified structure
+    const cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
+    const orderItems = cartItems.map(item => ({
+        fid: item.id, // Assuming you have an 'id' property for food items
+        foodname: item.foodname,
+        quantity: item.quantity,
+        price: item.price
+    }));
+
+    // Order data with simplified structure
+    const orderData = {
+        userId: <?php echo $user_id; ?>,
+        name: document.getElementById('name').value, 
+        // ... (other fields) 
+        orderItems: orderItems,
+        date: calculateOrderDate() // You'll need a function for this
+    };
+
+    // 2. Send data to the backend (checkout.php) using AJAX
+    fetch('checkout.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(orderData)
+    })
+    .then(response => response.json()) // Expect JSON response from checkout.php
+    .then(data => {
+      // Handle success or error messages from checkout.php
+      if (data.success) {
+        alert("Order placed successfully!");
+        // Potentially clear cart and local storage
+      } else {
+        alert("Error placing order: " + data.message); 
+      }
+    })
+    .catch(error => console.error('Error submitting order:', error));
+}
+
+function calculateOrderDate() {
+    // Implement logic to get the current date in the correct format (e.g., YYYY-MM-DD)
+    const today = new Date();
+    // ... format the date ... 
+    return formattedDate; 
+}
