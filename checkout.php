@@ -50,11 +50,15 @@ if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
     foreach ($cartItems as $item) {
         $stmt->bind_param('iisids', $user_id, $item['fid'], $item['foodname'], $item['quantity'], $item['price'], $orderData['date']);
         $stmt->execute();
+
+        $lastInsertId = $conn->insert_id;  // Get the newly inserted order item ID
     }
 
 } else {
     echo "Cart is empty or invalid";
 }
+
+
 
 ?>
 
@@ -140,10 +144,16 @@ if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
     <div class="payment-section">
         <h2>Payment Options</h2>
             </div>
+    
     <button class="place-order" id="place-order-button">Place Order</button> 
+    <button id="send-receipt-button">Send Receipt</button>
     <footer>
         <p>&copy; Eat with JJ 2024</p>
     </footer>
+    <script>
+        var userId = <?php echo json_encode($user_id); ?>;
+        var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
+    </script>
     <script src="scripts.js"></script> 
 </body>
 </html>

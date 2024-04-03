@@ -153,8 +153,8 @@ function loadOrderDetails() {
       const orderData = JSON.parse(storedData);
       document.getElementById('name').value = orderData.name;
       document.getElementById('email').value = orderData.email;
-      ocument.getElementById('phone').value = orderData.phone;
-      ocument.getElementById('address').value = orderData.address;
+      document.getElementById('phone').value = orderData.phone;
+      document.getElementById('address').value = orderData.address;
     }
 }  
 
@@ -171,9 +171,9 @@ window.addEventListener('load', loadOrderDetails);
 const placeOrderButton = document.getElementById('place-order-button');
 placeOrderButton.addEventListener('click', submitOrder);
 
+
 function submitOrder() {
     // Cart items - simplified structure
-    const cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
     const orderItems = cartItems.map(item => ({
         fid: item.id, // Assuming you have an 'id' property for food items
         foodname: item.foodname,
@@ -183,11 +183,9 @@ function submitOrder() {
 
     // Order data with simplified structure
     const orderData = {
-        userId: <?php echo $user_id; ?>,
         name: document.getElementById('name').value, 
-        // ... (other fields) 
         orderItems: orderItems,
-        date: calculateOrderDate() // You'll need a function for this
+        date: calculateOrderDate() 
     };
 
     // 2. Send data to the backend (checkout.php) using AJAX
@@ -216,4 +214,31 @@ function calculateOrderDate() {
     const today = new Date();
     // ... format the date ... 
     return formattedDate; 
+}
+
+// send receipt functionality
+document.getElementById('send-receipt-button').addEventListener('click', function() {
+    const orderData = localStorage.getItem('orderDetails');
+    if (orderData) {
+        const parsedData = JSON.parse(orderData);
+        sendReceiptEmail(parsedData); // Call your function to send the email
+    } else {
+        alert('No order details found in local storage.');
+    }
+});
+
+function sendReceiptEmail(orderData) {
+    fetch('send_receipt.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderData: orderData }) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Receipt sent to your email!');
+        } else {
+            alert('Error sending email: ' + data.message);
+        }
+    });
 }
