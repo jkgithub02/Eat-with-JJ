@@ -402,8 +402,8 @@ footer {
   /* Prevent extra space below images */
   margin: 0 auto;
   border-radius: 3%;
-  border: 3px;
-  border-color: #ccc;
+  border: 10 px #ccc;
+
 }
 
 .msg {
