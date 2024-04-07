@@ -7,3 +7,4 @@ deleteButtons.forEach(button => {
         }
     });
 });
+

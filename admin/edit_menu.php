@@ -30,7 +30,7 @@ $result = $conn->query($sql);
 
 <body>
     <?php include('header.php');?>
-
+    <h2>Menu</h2>
     <div class="add-container">
         <a href="add_food.php" class="button">Add Food Item</a>
     </div>

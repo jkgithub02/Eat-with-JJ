@@ -29,12 +29,9 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-    <?php include('header.php');?>
+    <?php include ('header.php'); ?>
 
-    <!-- <div class="add-container">
-        <a href="add_food.php" class="button">View Users</a>
-    </div> -->
-
+    <h2>Users</h2>
 
     <?php if ($result->num_rows > 0): ?>
         <table>
@@ -82,7 +79,7 @@ $result = $conn->query($sql);
         <p>No users found.</p>
     <?php endif; ?>
 
-        <script src="admin.js"></script>
+    <script src="admin.js"></script>
 
 </body>
 

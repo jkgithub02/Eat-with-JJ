@@ -29,8 +29,8 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-    <?php include('header.php');?>
-
+    <?php include ('header.php'); ?>
+    <h2>Categories</h2>
     <div class="add-container">
         <a href="add_category.php" class="button">Add Food Category</a>
     </div>
@@ -55,7 +55,7 @@ $result = $conn->query($sql);
                         <td>
                             <?php echo $row['catname']; ?>
                         </td>
-                     
+
                         <td>
                             <a href="edit_category.php?id=<?php echo $row['fcid']; ?>" class="button">Edit</a>
                         </td>
@@ -67,7 +67,7 @@ $result = $conn->query($sql);
         <p>No food categories found.</p>
     <?php endif; ?>
 
-        <script src="admin.js"></script>
+    <script src="admin.js"></script>
 
 </body>
 

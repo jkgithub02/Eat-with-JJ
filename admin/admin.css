@@ -21,6 +21,7 @@ header h1 {
     font-family: Arial;
 }
 
+
 header a {
     color: #ddd;
     padding: 10px;
@@ -100,7 +101,7 @@ main {
 }
 
 
-.welcome-message{
+.welcome-message {
     padding-top: 40px;
     display: flex;
     justify-content: center;
@@ -111,19 +112,26 @@ main {
     font-size: 50px;
 }
 
-.welcome-message img{
+.welcome-message img {
     border-radius: 5%;
 }
 
 .welcome-message p1 {
     display: inline-block;
-    padding-left: 100%;  /* Start the text off-screen */
-    animation: marquee 15s linear infinite; /* Animation details below */
+    padding-left: 100%;
+    /* Start the text off-screen */
+    animation: marquee 15s linear infinite;
+    /* Animation details below */
 }
 
 @keyframes marquee {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-100%, 0); } 
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-100%, 0);
+    }
 }
 
 .form-wrapper {
@@ -206,6 +214,13 @@ table {
     /* Center the table */
 }
 
+h2 {
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 220%;
+}
+
 th,
 td {
     border: 3px solid #ddd;
@@ -214,7 +229,12 @@ td {
 }
 
 th {
+    background-color: #f0f0f073;
     text-align: center;
+}
+
+tr:hover{
+   background-color: #f8f8f82a; 
 }
 
 .add-container {
@@ -222,4 +242,9 @@ th {
     justify-content: center;
     text-align: center;
     align-items: center;
+}
+
+p{
+    display: block;
+    text-align: center;
 }
