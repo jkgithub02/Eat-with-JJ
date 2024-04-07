@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class ="pagewithbg">
   <?php include('header.php'); ?>  
   <main>
     <section class="form-wrapper">

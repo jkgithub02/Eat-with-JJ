@@ -20,9 +20,6 @@
     <?php include('header.php'); ?>  
 
     <main>
-        <section id="about-hero">
-            <h1>Our Story</h1>
-        </section>
 
         <section id="mission">
             <div class="container">

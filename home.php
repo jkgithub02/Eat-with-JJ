@@ -22,9 +22,6 @@
       <div class="motto-container">
         <h2>"Eating with JJ is not just about the food, it's about the experience."</h2>
       </div>
-      <div class="image-container">
-        <img src="assets/lobster.jpeg" alt="lobster pasta">
-      </div>
     </section>
 
     <div class="testimonials-wrapper">
