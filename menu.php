@@ -13,7 +13,7 @@ include ('connection.php');
 <html lang="en">
 <script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="scripts.js"></script>
+<script src="cart.js"></script>
 
 <head>
     <meta charset="UTF-8">

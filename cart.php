@@ -124,7 +124,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="scripts.js"></script>
     <title>Your Cart</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
@@ -183,5 +182,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
     <footer>
         <p>&copy; Eat with JJ 2024</p>
     </footer>
+    <script src="cart.js"></script>
 </body>
 </html>

@@ -35,31 +35,6 @@ if ($result->num_rows !== 1) {
 // Get the result
 $user = $result->fetch_assoc();
 
-// Retrieve order data
-$orderData = json_decode(file_get_contents('php://input'), true);
-
-// Prepare the SQL query
-$sql = "INSERT INTO orders (uid, fid, foodname, quantity, price, sid, date) VALUES (?, ?, ?, ?, ?, 1, ?)";
-$stmt = $conn->prepare($sql);
-
-
-if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
-
-    $cartItems = $_SESSION['cart'];
-    // Now you can proceed with your foreach loop
-    foreach ($cartItems as $item) {
-        $stmt->bind_param('iisids', $user_id, $item['fid'], $item['foodname'], $item['quantity'], $item['price'], $orderData['date']);
-        $stmt->execute();
-
-        $lastInsertId = $conn->insert_id;  // Get the newly inserted order item ID
-    }
-
-} else {
-    echo "Cart is empty or invalid";
-}
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -135,8 +110,7 @@ if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                 <button type="button" id="save-order-details">Save Details for This Order</button>
                 <p id="save-details-feedback"></p>
                 <p>These details will only be saved for this order.</p>
-                <p>If you would like to change your permanenetly change your details, please change them on the profile page.</p>
-                <p>A receipt will be printed for this order.</p>
+                <p>If you would like to change your permanently change your details, please change them on the profile page.</p>
             </form>
         </section>
         </section>
@@ -146,7 +120,6 @@ if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
             </div>
     
     <button class="place-order" id="place-order-button">Place Order</button> 
-    <button id="send-receipt-button">Send Receipt</button>
     <footer>
         <p>&copy; Eat with JJ 2024</p>
     </footer>
@@ -154,7 +127,7 @@ if(isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
         var userId = <?php echo json_encode($user_id); ?>;
         var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
     </script>
-    <script src="scripts.js"></script> 
+    <script src="checkout.js"></script> 
 </body>
 </html>
 
