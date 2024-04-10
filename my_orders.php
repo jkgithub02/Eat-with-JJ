@@ -26,7 +26,7 @@ $resultCompleted = $stmt->get_result(); // Get the result
 
 <head>
     <title>Order Status</title>
-    <link rel="stylesheet" href="admin/admin.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>

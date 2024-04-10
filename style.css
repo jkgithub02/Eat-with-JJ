@@ -6,9 +6,7 @@ body {
   background-color: #000;
   color: #fff;
   font-size: 18px;
-  /* Increase base font size */
   line-height: 1.6;
-  /* Increase line spacing */
 }
 
 .pagewithbg {
@@ -18,9 +16,7 @@ body {
   padding-bottom: 80px;
   color: #fff;
   font-size: 18px;
-  /* Increase base font size */
   line-height: 1.6;
-  /* Increase line spacing */
   background: url('websiteimg/indoor.jpeg');
   background-size: cover;
   background-position: center;
@@ -28,10 +24,11 @@ body {
 }
 
 
+
 header {
   text-align: center;
   padding: 20px;
-  background-color: #111;
+  background-color: #1111119d;
 }
 
 header h1 {
@@ -44,14 +41,24 @@ header a {
 }
 
 header a.button-link {
-  /* other button styles */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 header a.button-link:hover,
 .order a:hover {
   background-color: #777272;
-  /* Sample accent color - replace as needed */
+}
+
+.logo-and-title {
+  display: flex; 
+  width: 100%;
+  justify-content: center;
+  align-items: center; 
+}
+
+#logo-image {
+  height: 50px;   
+  margin-right: 10px; 
 }
 
 a.button-link {
@@ -70,9 +77,7 @@ a.button-link:hover {
 
 .fas.fa-shopping-cart {
   font-size: 20px;
-  /* Adjust font size as needed */
   color: #fff;
-  /* Match link color */
   padding-left: 10px;
 }
 
@@ -123,22 +128,16 @@ footer {
 .form-wrapper {
   display: flex;
   flex-direction: column;
-  /* Optional, for vertical stacking if later needed */
   align-items: center;
   justify-content: center;
   width: 100%;
-  /* Ensure the wrapper takes up full width */
 }
 
 .form-container {
   background-color: #222;
-  /* Slightly lighter shade for contrast */
   padding: 40px;
-  /* More padding for spaciousness */
   border-radius: 8px;
-  /* Soften the edges */
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  /* Subtle shadow */
   text-align: center;
 }
 
@@ -167,32 +166,25 @@ footer {
 
 .form-container button[type="submit"] {
   background-color: #444;
-  /* Darker button color */
   color: #fff;
   padding: 12px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* Smooth transition */
 }
 
 .form-container button[type="submit"]:hover {
   background-color: #555;
-  /* Slightly darker on hover */
 }
 
 #hero {
   display: block;
   align-items: center;
-  /* Align content vertically */
   margin: 30px 0;
-  /* Add some margin */
   background-image: url('websiteimg/tablefood.jpeg');
   background-size: cover;
-  /* Scale the image to cover the entire section */
   background-position: center;
-  /* Center the image within the section */
   position: relative;
   width: 100%;
 }
@@ -205,38 +197,27 @@ footer {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Black with 50% opacity */
 }
 
 .motto-container {
   display: block;
-  /* Make it take up most of the space */
   text-align: center;
-  /* Align text to the left */
   font-size: 1.5em;
-  /* Increase motto font size */
   padding: 20px;
-  /* Add some padding for spacing */
 }
 
 #hero .motto-container h2 {
   color: white;
   position: relative;
-  /* Required for absolute positioning */
 }
 
 #hero .motto-container h2::after {
   content: attr(value);
-  /* Inherit the text content */
   position: absolute;
   top: 0.1em;
-  /* Adjust for outline width */
   left: 0.1em;
-  /* Adjust for outline width */
   color: black;
-  /* Black outline color */
   text-shadow: -0.1em -0.1em 0 white;
-  /* Compensate for white text */
 }
 
 #testimonials {
@@ -540,4 +521,126 @@ p::after {
 #save-details-feedback {
   font-weight: bold;
   margin-top: 10px;
+}
+
+.checkout-button{
+  background-color: #6d6d6db7;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cartheading{
+  display: block;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.cartheading h1{
+  border-radius: 3%;
+  border: 3px solid white;
+  margin: 2% 35%;
+  padding: 3px;
+}
+
+.carttable{
+  display: block;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  border-radius: 3%;
+}
+
+.carttable table {
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+.carttable th,
+td {
+    border: 3px solid #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+.carttable th {
+    background-color: #f0f0f073;
+    text-align: center;
+}
+
+.save-order{
+  background-color: #6d6d6db7;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.place-order{
+  background-color: #6d6d6db7;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.savepdf{
+    background-color: #6d6d6db7;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+  /* Center the table */
+}
+
+h2 {
+  display: block;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 220%;
+}
+
+th,
+td {
+  border: 3px solid #ddd;
+  padding: 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f0f073;
+  text-align: center;
+}
+
+tr:hover{
+ background-color: #f8f8f82a; 
+}
+
+.add-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+p{
+  display: block;
+  text-align: center;
+}
+
+p{
+  display: block;
+  width:100%;
+  text-align: center;
 }

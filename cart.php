@@ -1,11 +1,11 @@
 <?php
 // Enable error reporting for development
-error_reporting(E_ALL); 
+error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 // Database connection (replace with your credentials)
-include('connection.php');
+include ('connection.php');
 
 // Start the session for cart management 
 session_start();
@@ -36,7 +36,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
             if ($_SESSION['cart'][$i]['fid'] == $fid) {
                 $_SESSION['cart'][$i]['quantity']++;
                 $itemFound = true;
-                break; 
+                break;
             }
         }
 
@@ -51,17 +51,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
         }
 
         // Redirect to cart to show updated state
-        header("Location: cart.php"); 
-        exit; 
+        header("Location: cart.php");
+        exit;
 
     } else {
         // Handle the case where the food item is not found
-        echo "Invalid food item"; 
+        echo "Invalid food item";
     }
 }
 
 if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['fid'])) {
-    $fid = intval($_POST['fid']); 
+    $fid = intval($_POST['fid']);
 
     // Find the item in the cart
     for ($i = 0; $i < count($_SESSION['cart']); $i++) {
@@ -95,24 +95,24 @@ if (isset($_POST['action']) && $_POST['action'] == 'decrease' && isset($_POST['f
 
     // Handle the case where the item is not found
     echo "error: item not found";
-} 
+}
 
 if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['fid'])) {
-    $fid = intval($_POST['fid']); 
+    $fid = intval($_POST['fid']);
 
     // Find the item in the cart
     for ($i = 0; $i < count($_SESSION['cart']); $i++) {
         if ($_SESSION['cart'][$i]['fid'] == $fid) {
             // Increase quantity 
-            $_SESSION['cart'][$i]['quantity']++; 
-            echo "success"; 
-            exit; 
+            $_SESSION['cart'][$i]['quantity']++;
+            echo "success";
+            exit;
         }
     }
 
     // Handle the case where the item is not found
     echo "error: item not found";
-} 
+}
 
 
 ?>
@@ -125,58 +125,62 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Your Cart</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <?php include('header.php'); ?>
+    <?php include ('header.php'); ?>
     <main>
-        <h1>Your Shopping Cart</h1>
+        <div class="cartheading">
+            <h1>Your Shopping Cart</h1>
+        </div>
 
         <?php
         if (empty($_SESSION['cart'])) {
             echo "<p>Your cart is empty.</p>";
         } else {
             ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    $total = 0;
-                    foreach ($_SESSION['cart'] as $item) { 
-                        $subtotal = $item['price'] * $item['quantity'];
-                        $total += $subtotal;
-                    ?>
-                    <tr>
-                        <td><?= $item['foodname'] ?></td>
-                        <td>RM<?= $item['price'] ?></td>
-                        <td><?= $item['quantity'] ?></td>
-                        <td>RM<?= $subtotal ?></td>
-                        <td>
-                            <button class="increase-quantity" data-fid="<?= $item['fid'] ?>">+</button>
-                            <button class="decrease-quantity" data-fid="<?= $item['fid'] ?>">-</button>
-                            <button class="remove-item" data-fid="<?= $item['fid'] ?>">Remove</button>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-right">Total:</td>
-                        <td>RM<?= $total ?></td>
-                    </tr>
-                </tfoot>
-            </table>
-
-            <a href="checkout.php" class="button">Proceed to Checkout</a> 
-        <?php } ?>           
+            <div class="carttable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $total = 0;
+                        foreach ($_SESSION['cart'] as $item) {
+                            $subtotal = $item['price'] * $item['quantity'];
+                            $total += $subtotal;
+                            ?>
+                            <tr>
+                                <td><?= $item['foodname'] ?></td>
+                                <td>RM<?= $item['price'] ?></td>
+                                <td><?= $item['quantity'] ?></td>
+                                <td>RM<?= $subtotal ?></td>
+                                <td>
+                                    <button class="increase-quantity" data-fid="<?= $item['fid'] ?>">+</button>
+                                    <button class="decrease-quantity" data-fid="<?= $item['fid'] ?>">-</button>
+                                    <button class="remove-item" data-fid="<?= $item['fid'] ?>">Remove</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Total:</td>
+                            <td>RM<?= $total ?></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a href="checkout.php" class="checkout-button">Proceed to Checkout</a>
+            </div>
+        <?php } ?>
 
     </main>
     <footer>
@@ -184,4 +188,5 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
     </footer>
     <script src="cart.js"></script>
 </body>
+
 </html>

@@ -37,17 +37,17 @@
                 <br>
                 <div class="team-profiles">
                     <div class="profile">
-                        <img src="assets/ilt.jpeg" alt="Head Chef">
+                        <img src="websiteimg/c1.jpeg" alt="Head Chef 1">
                         <h3>Head Chef</h3>
                         <p>Short bio about the chef's experience.</p>
                     </div>
                     <div class="profile">
-                        <img src="assets/ilt.jpeg" alt="Head Chef">
+                        <img src="websiteimg/c1.jpeg" alt="Head Chef 2">
                         <h3>Head Chef</h3>
                         <p>Short bio about the chef's experience.</p>
                     </div>
                     <div class="profile">
-                        <img src="assets/ilt.jpeg" alt="Head Chef">
+                        <img src="websiteimg/c1.jpeg" alt="Head Chef 3">
                         <h3>Head Chef</h3>
                         <p>Short bio about the chef's experience.</p>
                     </div>
