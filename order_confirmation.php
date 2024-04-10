@@ -35,7 +35,7 @@ $userDetails = json_encode($_SESSION['user_id']); // Assuming user data is in se
 
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

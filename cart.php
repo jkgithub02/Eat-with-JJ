@@ -119,7 +119,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
 
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,6 +1,7 @@
 
 <header>
     <h1>Eat with JJ</h1>
+    <script src="https://kit.fontawesome.com/8e05c53646.js" crossorigin="anonymous"></script>
     <nav>
       <a href="home.php" class="button-link">Home</a>
       <a href="menu.php" class="button-link">Menu</a>
