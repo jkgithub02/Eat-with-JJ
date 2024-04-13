@@ -10,6 +10,11 @@ include ('connection.php');
 // Start the session for cart and user data
 session_start();
 
+if (empty($_SESSION['cart'])) {
+    header("Location: cart.php"); // Redirect to cart if empty
+    exit;
+}
+
 // Assuming you know the user's ID
 $user_id = $_SESSION['user_id'];  // (Or however you retrieve the user ID)
 
