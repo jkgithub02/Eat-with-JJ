@@ -1,5 +1,4 @@
 // Checkout Functionality
-console.log(document.getElementById('saveButton'));
 // Get the button element
 const saveButton = document.getElementById('save-order-details');
 
@@ -9,12 +8,12 @@ saveButton.addEventListener('click', saveOrderDetailsLocally);
 // Inside your existing 'save-order-details' button click handler
 function saveOrderDetailsLocally() {
     const orderData = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      phone: document.getElementById('phone').value,
-      address: document.getElementById('address').value 
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    address: document.getElementById('address').value 
     };
-  
+
     // Store in local storage
     localStorage.setItem('orderDetails', JSON.stringify(orderData)); 
 
@@ -28,6 +27,7 @@ function saveOrderDetailsLocally() {
         feedbackElement.textContent = "";
     }, 3000); // 3 seconds delay
 }
+
 
 // Function to load from local storage (call on page load or when needed)
 function loadOrderDetails() {
@@ -70,21 +70,31 @@ function submitOrder() {
         orderPlaced: true // Mark the order as placed
     };
 
-    fetch('process_order.php', { // Send to your PHP order processing script
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            clearCart();
-            window.location.href = "order_confirmation.php";
-        } else {
-            alert("Error placing order: " + data.message); 
-        }
-    })
-    .catch(error => console.error('Error submitting order:', error));
+    const paymentForm = document.getElementById('paymentForm');
+    const selectedPayment = document.querySelector('input[name="payment_method"]:checked').value;
+
+    if (selectedPayment === "Credit/Debit Card") {
+        // paymentForm.action = "card_payment.php"; 
+        window.location.href = "card_payment.php";
+    } else if (selectedPayment === "Cash") {
+        fetch('process_order.php', { // Send to your PHP order processing script
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                clearCart();
+                window.location.href = "order_confirmation.php";
+            } else {
+                alert("Error placing order: " + data.message); 
+            }
+        })
+        .catch(error => console.error('Error submitting order:', error));
+    }
+
+
 }
 
 // Helper to clear the cart

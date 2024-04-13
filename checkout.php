@@ -128,6 +128,12 @@ $user = $result->fetch_assoc();
     </div>
     <div class="cartheading">
         <h1>Payment Options</h1>
+        <form id="paymentForm">
+            <input type="radio" id="card" name="payment_method" value="Credit/Debit Card">
+            <label for="html">Credit/Debit Card</label><br>
+            <input type="radio" id="cash" name="payment_method" value="Cash"> 
+            <label for="cash">Cash</label>
+        </form>
         <button class="place-order" id="place-order-button">Place Order</button>
     </div>
     <footer>
