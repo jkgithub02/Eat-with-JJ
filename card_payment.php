@@ -50,28 +50,31 @@ $user = $result->fetch_assoc();
 <body>
     <?php include ('header.php'); ?>
     <main>
-        <h1>Card Payment</h1>
-        <form id="cardPaymentForm">
-        <div class="form-group">
-                <label for="cardNumber">Card Number:</label>
-                <input type="text" id="cardNumber" name="cardNumber" required>
-            </div>
-            <div class="form-group">
-                <label for="expiryDate">Expiry Date (MM/YY):</label>
-                <input type="text" id="expiryDate" name="expiryDate" required>
-            </div>
-            <div class="form-group">
-                <label for="cvv">CVV:</label>
-                <input type="password" id="cvv" name="cvv" required>
-            </div>
-        </form>
-        <button class="place-order" id="place-order-button">Place Order</button> 
+        <div class="cartheading">
+            <h1>Card Payment</h1>
+        </div>
+        <div class="form-wrap">
+                <form method="POST" id="cardPaymentForm">
+
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" required>
+
+                    <label for="expiryDate">Expiry Date (MM/YY):</label>
+                    <input type="text" id="expiryDate" name="expiryDate" required>
+
+                    <label for="cvv">CVV:</label>
+                    <input type="password" id="cvv" name="cvv" required>
+                    
+                    <button type="submit" class="place-order" id="place-order-button" >Place Order</button>
+
+                </form>
+        </div>
     </main>
 </body>
-    <script>
-        var userId = <?php echo json_encode($user_id); ?>;
-        var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
-    </script>
-    <script src="card_checkout.js"></script>
-</html>
+<script>
+    var userId = <?php echo json_encode($user_id); ?>;
+    var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
+</script>
+<script src="card_checkout.js"></script>
 
+</html>

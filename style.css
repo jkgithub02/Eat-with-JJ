@@ -125,6 +125,59 @@ footer {
   width: 100%;
 }
 
+.form-wrap{
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #222;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  margin: auto 30%;
+}
+
+.form-wrap input[type="text"],
+.form-wrap input[type="password"] {
+  
+  width: 50%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+
+}
+
+
+.form-wrap label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-wrap button {
+  display: block;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #444;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-wrap button:hover {
+  background-color: #555;
+}
+
 .form-wrapper {
   display: flex;
   flex-direction: column;
@@ -644,3 +697,4 @@ p{
   width:100%;
   text-align: center;
 }
+

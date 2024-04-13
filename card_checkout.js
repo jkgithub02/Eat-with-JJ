@@ -1,6 +1,11 @@
 const placeOrderButton = document.getElementById('place-order-button');
+const cardPaymentForm = document.getElementById('cardPaymentForm');
 placeOrderButton.addEventListener('click', function() {
-    submitOrder();
+    if (cardPaymentForm.checkValidity()) { // Use built-in form validation
+        submitOrder();
+      } else {
+        cardPaymentForm.reportValidity(); // Force display of validation messages
+      }
 });
 
 
