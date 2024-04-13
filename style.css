@@ -142,7 +142,8 @@ footer {
   margin: auto 30%;
 }
 
-.form-wrap input[type="text"],
+.form-wrap input[type="tel"],
+.form-wrap input[type="month"],
 .form-wrap input[type="password"] {
   
   width: 50%;

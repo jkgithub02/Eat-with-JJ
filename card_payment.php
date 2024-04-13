@@ -54,20 +54,21 @@ $user = $result->fetch_assoc();
             <h1>Card Payment</h1>
         </div>
         <div class="form-wrap">
-                <form method="POST" id="cardPaymentForm">
+            <form method="POST" action="order_confirmation.php" id="cardPaymentForm">
 
-                    <label for="cardNumber">Card Number:</label>
-                    <input type="text" id="cardNumber" name="cardNumber" required>
+                <label for="cardNumber">Card Number:</label>
+                <input type="tel" id="cardNumber" name="cardNumber" inputmode="numeric" pattern="[0-9\s]{13,19}"
+                    autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
 
-                    <label for="expiryDate">Expiry Date (MM/YY):</label>
-                    <input type="text" id="expiryDate" name="expiryDate" required>
+                <label for="expiryDate">Expiry Date (MM/YY):</label>
+                <input type="month" id="expiryDate" name="expiryDate" required>
 
-                    <label for="cvv">CVV:</label>
-                    <input type="password" id="cvv" name="cvv" required>
-                    
-                    <button type="submit" class="place-order" id="place-order-button" >Place Order</button>
+                <label for="cvv">CVV:</label>
+                <input type="password" id="cvv" name="cvv" inputmode="numeric" maxlength="3" required>
 
-                </form>
+                <button type="submit" class="place-order" id="place-order-button">Place Order</button>
+
+            </form>
         </div>
     </main>
 </body>
