@@ -17,8 +17,18 @@ if (isset($_GET['delete_id'])) {
 }
 
 // Fetch food items 
-$sql = "SELECT fid, fcid, foodname, price, description FROM food";
+$sql = "SELECT fid, fcid, foodname, price, description, avl FROM food";
 $result = $conn->query($sql);
+
+if (isset($_GET['toggle_availability'])) {
+    $id = (int) $_GET['toggle_availability']; 
+    $sql = "UPDATE food SET avl = (avl ^ 1)  WHERE fid = ?"; // Toggle with XOR
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    header('Location: edit_menu.php'); //Redirect to refresh
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +39,7 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-    <?php include('header.php');?>
+    <?php include ('header.php'); ?>
     <h2>Menu</h2>
     <div class="add-container">
         <a href="add_food.php" class="button">Add Food Item</a>
@@ -45,6 +55,7 @@ $result = $conn->query($sql);
                     <th>Food Name</th>
                     <th>Price</th>
                     <th>Description</th>
+                    <th>Availability</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -67,8 +78,14 @@ $result = $conn->query($sql);
                             <?php echo $row['description']; ?>
                         </td>
                         <td>
+                            <?php echo ($row['avl'] == 1) ? 'Available' : 'Unavailable'; ?>
+                        </td>
+                        <td>
                             <a href="edit_food.php?id=<?php echo $row['fid']; ?>" class="button">Edit</a>
                             <a href="?delete_id=<?php echo $row['fid']; ?>" class="button delete">Delete</a>
+                            <a href="?toggle_availability=<?php echo $row['fid']; ?>" class="button availability">
+                            <?php echo ($row['avl'] == 1) ? 'Set Unavailable' : 'Set Available'; ?> 
+                            </a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -78,7 +95,7 @@ $result = $conn->query($sql);
         <p>No food items found.</p>
     <?php endif; ?>
 
-        <script src="admin.js"></script>
+    <script src="admin.js"></script>
 
 </body>
 

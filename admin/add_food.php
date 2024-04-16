@@ -33,8 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param("issds", $fcid, $foodName, $description, $price, $imageName);
 
                 if ($stmt->execute()) {
-                    // $successMessage = "Food item added successfully!";
-                    // Redirect with JavaScript - Include the pop-up message
                     echo 
                     "<script>
                         alert('Food item updated successfully!');
@@ -102,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "<option value=''>No food categories found</option>";
                     }
                     ?>
+                
                 </select><br><br>
 
                 <label for="price">Price:</label>

@@ -45,14 +45,11 @@ include ('connection.php');
 
         <div class="menu-container">
             <?php
-            // Handle filtering
             $selected_category = isset($_POST['category']) ? (int) $_POST['category'] : '0';
 
             if ($selected_category == '0') {
-                // Include all foods, regardless of category
-                $sql = "SELECT * FROM food";
+                $sql = "SELECT * FROM food WHERE avl = 1";
                 $result = mysqli_query($conn, $sql);
-                // var_dump($sql);
             
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) { ?>
@@ -78,7 +75,6 @@ include ('connection.php');
 
             }
 
-            // SQL query with filtering
             if ($selected_category != '0') {
                 $sql = "SELECT * FROM food f LEFT JOIN foodcat fc ON f.fcid = fc.fcid ";
                 $sql .= "WHERE f.fcid = $selected_category";

@@ -81,6 +81,17 @@ a.button-link:hover {
     /* Slightly darker green on hover */
 }
 
+.button.availability {
+    background-color: #dfce36;
+    /* Red background */
+    color: white;
+    /* White text for contrast */
+}
+
+.button.availability:hover {
+    background-color: #a59c23;
+    /* Darker red on hover */
+}
 .button.delete {
     background-color: #f44336;
     /* Red background */
@@ -92,6 +103,7 @@ a.button-link:hover {
     background-color: #da190b;
     /* Darker red on hover */
 }
+
 
 main {
     padding: 20px;

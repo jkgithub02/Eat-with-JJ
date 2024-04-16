@@ -17,11 +17,17 @@ if (isset($_GET['delete_id'])) {
 }
 
 // Fetch Preparing Orders
-$sql = "SELECT * FROM orders WHERE sid = 1"; // Status: Preparing 
+$sql = "SELECT o.oid, o.uid, o.fid, f.foodname, o.quantity,  f.price, o.sid, o.date
+        FROM orders o 
+        JOIN food f ON o.fid = f.fid 
+        WHERE o.sid = 0";
 $resultPreparing = $conn->query($sql);
 
 // Fetch Completed Orders
-$sql = "SELECT * FROM orders WHERE sid = 2"; // Status: Completed
+$sql = "SELECT o.oid, o.uid, o.fid, f.foodname, o.quantity,  f.price, o.sid, o.date
+        FROM orders o 
+        JOIN food f ON o.fid = f.fid 
+        WHERE o.sid = 1";
 $resultCompleted = $conn->query($sql);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id']) && isset($_POST['new_status'])) {
@@ -89,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id']) && isset(
                             <?php echo $row['price']; ?>
                         </td>
                         <td>
-                            <?php echo $row['sid']; ?>
+                            <?php echo ($row['sid'] == 0) ? 'Preparing' : 'Completed'; ?>
                         </td>
                         <td>
                             <?php echo $row['date']; ?>
@@ -98,9 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id']) && isset(
                             <form method="POST" action="">
                                 <input type="hidden" name="order_id" value="<?php echo $row['oid']; ?>">
                                 <?php if ($row['sid'] == 1): ?>
-                                    <button type="submit" name="new_status" value="2" class="button">Mark as Completed</button>
+                                    <button type="submit" name="new_status" value="0" class="button">Mark as Preparing</button>
                                 <?php else: ?>
-                                    <button type="submit" name="new_status" value="1" class="button">Mark as Preparing</button>
+                                    <button type="submit" name="new_status" value="1" class="button">Mark as Completed</button>
                                 <?php endif; ?>
                                 <a href="?delete_id=<?php echo $row['oid']; ?>" class="button delete">Delete</a>
 
@@ -151,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id']) && isset(
                             <?php echo $row['price']; ?>
                         </td>
                         <td>
-                            <?php echo $row['sid']; ?>
+                            <?php echo ($row['sid'] == 0) ? 'Preparing' : 'Completed'; ?>
                         </td>
                         <td>
                             <?php echo $row['date']; ?>
@@ -160,9 +166,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id']) && isset(
                             <form method="POST" action="">
                                 <input type="hidden" name="order_id" value="<?php echo $row['oid']; ?>">
                                 <?php if ($row['sid'] == 1): ?>
-                                    <button type="submit" name="new_status" value="2" class="button">Mark as Completed</button>
+                                    <button type="submit" name="new_status" value="0" class="button">Mark as Preparing</button>
                                 <?php else: ?>
-                                    <button type="submit" name="new_status" value="1" class="button">Mark as Preparing</button>
+                                    <button type="submit" name="new_status" value="1" class="button">Mark as Completed</button>
                                 <?php endif; ?>
                                 <a href="?delete_id=<?php echo $row['oid']; ?>" class="button delete">Delete</a>
 
