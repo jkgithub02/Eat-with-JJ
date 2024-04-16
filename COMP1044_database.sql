@@ -45,6 +45,8 @@ CREATE TABLE food(
     description TEXT, 
     price DECIMAL(10,2) NOT NULL,
     img VARCHAR(222) NOT NULL,
+    --avl '1' means available, avl '0' means unavailable
+    avl INT NOT NULL DEFAULT 1,
     FOREIGN KEY (fcid) REFERENCES foodcat(fcid)
 );
 
@@ -71,28 +73,18 @@ INSERT INTO food(fid, fcid, foodname, description, price, img) VALUES
 (20, 4, "Hibiscus Tea", "Lorem Ipsum", "5.00", "hibtea.jpeg");
 
 
-CREATE TABLE stat (
-    sid INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    detail VARCHAR(222) NOT NULL
-);
-
-INSERT INTO stat (sid, detail) VALUES
-(1, "Preparing.."),
-(2, "Completed");
 
 
 CREATE TABLE orders ( 
   oid INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
   uid INT NOT NULL,
   fid INT NOT NULL,
-  foodname VARCHAR(100) NOT NULL,
   quantity INT NOT NULL,
-  price DECIMAL(10,2) NOT NULL,
-  sid INT NOT NULL,
+  --status 0 means preparing, 1 means completed
+  sid INT NOT NULL DEFAULT 0,
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
   FOREIGN KEY (uid) REFERENCES user(uid),
-  FOREIGN KEY (fid) REFERENCES food(fid),
-  FOREIGN KEY (sid) REFERENCES stat(sid)
+  FOREIGN KEY (fid) REFERENCES food(fid)
 );
 
 

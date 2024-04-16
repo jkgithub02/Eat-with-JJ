@@ -7,14 +7,14 @@ session_start();
 $user_id = $_SESSION['user_id'];
 
 // Preparing Orders
-$sql = "SELECT * FROM orders WHERE uid = ? AND sid = 1"; // Filtering by status here 
+$sql = "SELECT * FROM orders WHERE uid = ? AND sid = 0"; // Filtering by status here 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $resultPreparing = $stmt->get_result(); // Get the result
 
 // Completed Orders
-$sql = "SELECT * FROM orders WHERE uid = ? AND sid = 2";  
+$sql = "SELECT * FROM orders WHERE uid = ? AND sid = 1";  
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
