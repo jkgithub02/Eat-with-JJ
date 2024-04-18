@@ -37,7 +37,7 @@ INSERT INTO foodcat (fcid, catname) VALUES
 (3, "Pizza"),
 (4, "Beverages");
 
-
+-- avl '1' means available, avl '0' means unavailable
 CREATE TABLE food(
     fid INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     fcid INT NOT NULL,
@@ -45,7 +45,6 @@ CREATE TABLE food(
     description TEXT, 
     price DECIMAL(10,2) NOT NULL,
     img VARCHAR(222) NOT NULL,
-    --avl '1' means available, avl '0' means unavailable
     avl INT NOT NULL DEFAULT 1,
     FOREIGN KEY (fcid) REFERENCES foodcat(fcid)
 );
@@ -74,13 +73,12 @@ INSERT INTO food(fid, fcid, foodname, description, price, img) VALUES
 
 
 
-
+-- status 0 means preparing, 1 means completed
 CREATE TABLE orders ( 
   oid INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
   uid INT NOT NULL,
   fid INT NOT NULL,
   quantity INT NOT NULL,
-  --status 0 means preparing, 1 means completed
   sid INT NOT NULL DEFAULT 0,
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
   FOREIGN KEY (uid) REFERENCES user(uid),
