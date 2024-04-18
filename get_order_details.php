@@ -13,7 +13,10 @@ session_start();
 $user_id = $_SESSION['user_id'];
 
 // Prepare and execute the query 
-$sql = "SELECT foodname, quantity, price FROM orders WHERE uid = ? AND `date` = (SELECT MAX(`date`) FROM orders WHERE uid = ?)";
+$sql = "SELECT food.foodname, orders.quantity, food.price 
+        FROM orders 
+        JOIN food ON orders.fid = food.fid
+        WHERE orders.uid = ? AND orders.date = (SELECT MAX(orders.date) FROM orders WHERE uid = ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $user_id, $user_id); // Bind 'ss' and the user twice
 $stmt->execute();

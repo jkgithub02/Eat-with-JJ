@@ -27,7 +27,7 @@ $user = $result->fetch_assoc();
 
 if ($orderData['orderPlaced']) { 
     // Prepare the main orders table insertion
-    $sql = "INSERT INTO orders (uid, fid, foodname, quantity, price, sid, date) VALUES (?, ?, ?, ?, ?, 1, ?)";
+    $sql = "INSERT INTO orders (uid, fid, quantity, sid, date) VALUES (?, ?, ?, 1, ?)";
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
@@ -36,7 +36,7 @@ if ($orderData['orderPlaced']) {
     }
 
     foreach ($orderData['orderItems'] as $item) {
-        $stmt->bind_param('iisids', $orderData['userId'], $item['fid'], $item['foodname'], $item['quantity'], $item['price'], $orderData['date']);
+        $stmt->bind_param('iiis', $orderData['userId'], $item['fid'], $item['quantity'], $orderData['date']);
 
         if (!$stmt->execute()) {
             echo json_encode(['success' => false, 'error' => 'Database insertion failed']);

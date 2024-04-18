@@ -13,7 +13,7 @@ session_start();
 $user_id = $_SESSION['user_id'];  // (Or however you retrieve the user ID)
 
 // Prepare the query to select from the 'order' table
-$sql = "SELECT * FROM `orders` WHERE uid = ?";
+$sql = "SELECT * FROM orders WHERE uid = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
