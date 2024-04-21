@@ -17,6 +17,12 @@ function saveOrderDetailsLocally() {
     // Store in local storage
     localStorage.setItem('orderDetails', JSON.stringify(orderData)); 
 
+    Swal.fire({
+        title: "Details have been successfully saved!",
+        // text: "That thing is still around?",
+        icon: "success"
+    });
+    
     // Show feedback message
     const feedbackElement = document.getElementById('save-details-feedback');
     feedbackElement.textContent = "Details Saved!";

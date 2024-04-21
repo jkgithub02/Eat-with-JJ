@@ -94,7 +94,12 @@ $(document).ready(function() {
             data: { fid: fid, quantity: quantity, action: 'add' },
             success: function(response) {
                 // Optionally, provide feedback for successful addition
-                alert("Item added to cart!");
+                // alert("Item added to cart!");
+                Swal.fire({
+                    title: "Item has been successfully added to cart!",
+                    // text: "That thing is still around?",
+                    icon: "success"
+                });
 
                 // ... (Any further actions you want to execute)
             },

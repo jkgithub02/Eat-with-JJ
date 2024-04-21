@@ -123,6 +123,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Your Cart</title>
     <link rel="stylesheet" href="style.css">
