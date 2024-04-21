@@ -50,6 +50,11 @@ function saveReceiptasPDF() {
 
             doc.text(`Total: RM ${total.toFixed(2)}`, 20, yPos);
             doc.save('order-receipt.pdf');
+            Swal.fire({
+                title: "Receipt has been successfully generated.",
+                // text: "That thing is still around?",
+                icon: "success"
+            });
         })
         .catch(error => {
             console.error("Error fetching order details:", error);

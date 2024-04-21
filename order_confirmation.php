@@ -42,6 +42,7 @@ $userDetails = json_encode($_SESSION['user_id']); // Assuming user data is in se
     <script>
         const userDetails = <?php echo $userDetails; ?>;
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Eat with JJ - Order Confirmation</title>
