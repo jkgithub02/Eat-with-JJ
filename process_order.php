@@ -27,7 +27,7 @@ $user = $result->fetch_assoc();
 
 if ($orderData['orderPlaced']) { 
     // Prepare the main orders table insertion
-    $sql = "INSERT INTO orders (uid, fid, quantity, sid, date) VALUES (?, ?, ?, 1, ?)";
+    $sql = "INSERT INTO orders (uid, fid, quantity, sid, date) VALUES (?, ?, ?, 0, ?)";
     $stmt = $conn->prepare($sql);
 
     if (!$stmt) {
