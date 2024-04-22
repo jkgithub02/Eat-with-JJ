@@ -661,7 +661,7 @@ table {
 h2 {
   display: block;
   text-align: center;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-size: 220%;
 }
 
