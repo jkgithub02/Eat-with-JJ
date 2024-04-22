@@ -7,14 +7,14 @@ session_start();
 $user_id = $_SESSION['user_id'];
 
 // Preparing Orders
-$sql = "SELECT * FROM orders WHERE uid = ? AND sid = 0"; // Filtering by status here 
+$sql = "SELECT o.*, f.foodname, f.price FROM orders o JOIN food f ON o.fid = f.fid WHERE o.uid = ? AND o.sid = 0"; 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
 $resultPreparing = $stmt->get_result(); // Get the result
 
 // Completed Orders
-$sql = "SELECT * FROM orders WHERE uid = ? AND sid = 1";  
+$sql = "SELECT o.*, f.foodname, f.price FROM orders o JOIN food f ON o.fid = f.fid WHERE o.uid = ? AND o.sid = 1";  
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $user_id);
 $stmt->execute();
