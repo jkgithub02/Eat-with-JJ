@@ -1,8 +1,8 @@
 <?php
-  // Database connection (replace with your connection details)
-  session_start();
-  // error_reporting(0);
-  include ('connection.php'); 
+// Database connection (replace with your connection details)
+session_start();
+// error_reporting(0);
+include ('connection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,15 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eat with JJ - Login</title>
   <link rel="stylesheet" href="style.css">
+  <script src='password.js'></script>
+  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
 
-<body class ="pagewithbg">
-  <?php include('header.php'); ?>  
+<body class="pagewithbg">
+  <?php include ('header.php'); ?>
   <main>
     <section class="form-wrapper">
       <section class="form-container">
         <h2>Login</h2>
-        <form action="login.php" method="POST">
+        <form action="login.php" method="POST" id="loginForm">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required>
           <label for="password">Password:</label>
@@ -33,7 +36,7 @@
   </main>
 
   <?php
-  
+
   if (isset($_POST['username']) && isset($_POST['password'])) {
 
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -54,17 +57,17 @@
         // Successful login 
         $_SESSION['logged_in'] = true;  // Use the correct flag name
         $_SESSION['user_id'] = $row['uid']; // Store user ID in session
-
         $_SESSION['user_logged_in'] = true;
         // Redirect to a logged-in area 
         header("Location: menu.php"); // Assuming you want to redirect to home
+        echo json_encode(['status' => '1']);
         exit();
 
       } else {
-        echo "Incorrect password.";
+        echo json_encode(['status' => '0']);
       }
     } else {
-      echo "Incorrect username or password.";
+      echo json_encode(['status' => '0']);
     }
 
     mysqli_close($conn); // Close the database connection 

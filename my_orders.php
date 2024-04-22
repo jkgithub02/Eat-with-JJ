@@ -42,7 +42,6 @@ $resultCompleted = $stmt->get_result(); // Get the result
                     <th>Food ordered</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Status</th>
                     <th>Time</th>
                 </tr>
             </thead>
@@ -68,9 +67,6 @@ $resultCompleted = $stmt->get_result(); // Get the result
                             <?php echo $row['price']; ?>
                         </td>
                         <td>
-                            <?php echo $row['sid']; ?>
-                        </td>
-                        <td>
                             <?php echo $row['date']; ?>
                         </td>
                     </tr>
@@ -91,7 +87,6 @@ $resultCompleted = $stmt->get_result(); // Get the result
                     <th>Food ordered</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Status</th>
                     <th>Time</th>
                 </tr>
             </thead>
@@ -115,9 +110,6 @@ $resultCompleted = $stmt->get_result(); // Get the result
                         </td>
                         <td>
                             <?php echo $row['price']; ?>
-                        </td>
-                        <td>
-                            <?php echo $row['sid']; ?>
                         </td>
                         <td>
                             <?php echo $row['date']; ?>

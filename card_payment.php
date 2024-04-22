@@ -58,7 +58,7 @@ $user = $result->fetch_assoc();
 
                 <label for="cardNumber">Card Number:</label>
                 <input type="tel" id="cardNumber" name="cardNumber" inputmode="numeric" pattern="[0-9\s]{13,19}"
-                    autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" required>
+                    autocomplete="cc-number" maxlength="16" placeholder="xxxx xxxx xxxx xxxx" required>
 
                 <label for="expiryDate">Expiry Date (MM/YY):</label>
                 <input type="month" id="expiryDate" name="expiryDate" required>
