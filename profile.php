@@ -94,7 +94,25 @@ $user = $result->fetch_assoc();
 
         $errors = [];
 
-        // ... (Add validation checks for name, email, phone, address) ... 
+        $newEmail = $_POST['email'] ?? '';
+        if ($newEmail !== $user['email']) { // Assuming $user['email'] holds the current email
+            $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE email = ?");
+            $stmt->bind_param("s", $newEmail);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $count = $result->fetch_row()[0];
+
+            if ($count > 0) { // Duplicate email found
+                echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Email Unavailable',
+                text: 'The chosen email is already in use. Please select a different one.'
+            });
+            </script>";
+                exit();
+            }
+        }
     
         // Password-Specific Validation
         if (!empty($newPassword)) {

@@ -76,14 +76,14 @@ include ('connection.php');
     $count = $result->fetch_row()[0];
 
     if ($count > 0) { // Duplicate username found 
-        echo "<script>
+      echo "<script>
               Swal.fire({
                  icon: 'error',
                  title: 'Username Unavailable',
                  text: 'The chosen username is already taken. Please select a different one.'
               });
-              </script>"; 
-        exit(); 
+              </script>";
+      exit();
     }
 
     // Check for Existing Email and Username
@@ -130,7 +130,17 @@ include ('connection.php');
     mysqli_stmt_bind_param($stmt, "ssssss", $username, $name, $phone, $address, $email, $hashed_password);
 
     if (mysqli_stmt_execute($stmt)) {
-      echo "Signup successful! You can now log in.";
+      echo "<script>
+      Swal.fire({
+          icon: 'success',
+          title: 'Signup Successful!',
+          text: 'Your account has been created.',
+          showConfirmButton: false, 
+          timer: 1500 // Auto-close after 1.5 seconds
+      }).then(() => {
+          window.location.href = 'login.php'; // Redirect to login after the alert
+      });
+  </script>";
     } else {
       // Check for specific error code related to duplicates
       if (mysqli_errno($conn) === 1062) { // MySQL error code for duplicates

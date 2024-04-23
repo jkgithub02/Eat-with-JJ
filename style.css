@@ -354,61 +354,42 @@ footer {
 }
 
 .carousels-container {
-  display: flex;
-  margin: 0 auto;
-  /* Make the container a flexbox row */
-  justify-content: space-around;
-  /* Distribute carousels with space*/
-  flex-wrap: wrap;
-  /* Allow carousels to wrap if the screen is narrow */
-  width: 100%;
-  padding: 20px 0;
-  /* Add padding above and below carousels */
+  width: 80%; /* Adjust width as needed */
+  margin: auto 20%; /* Center the carousels */
+  display: flex;  /* Enable flexbox layout */
+  justify-content: space-around; /* Distribute space between carousels */
 }
 
+/* Individual Carousel Styling */
 .carousel {
-  width: 40%;
-  /* Adjust width as needed */
-  max-height: 400px;
-  margin: 30px auto;
-  position: relative;
-  overflow: visible;
-  margin-bottom: 40px;
+  display: flex; /* Allow slides to sit side-by-side */
+  width: 300px; /* Example: Width equal to the width of one slide */
+  overflow: hidden; /* Hide anything that overflows the carousel */
 }
 
-.carousel-slides {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  /* For touch devices */
-  list-style-type: none;
-  border: 5px solid #ddd;
-  border-radius: 10px;
-  border-style: dashed;
-  /* Removes bullet points */
-}
-
+/* Individual Slide Styling */
 .carousel-slide {
-  flex-shrink: 0;
-  width: 100%;
-  /* All slides same width */
-  scroll-snap-align: center;
-  margin: 0 10px;
+  flex-shrink: 0; /* Ensures slides don't shrink to fit */
+  width: 100%;    /* Slides take up the full width of the carousel */
+  margin-right: 0; /* No margin needed between slides */ 
 }
+
+/* Styling the Slide List */
+.carousel-slides {
+    display: flex;
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    /* Add the following for smooth transitions */
+    transition: transform 0.5s ease-in-out;  
+}
+
 
 .carousel-slide img {
-  padding-top: 10px;
-  max-width: 72%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 8px;
-  /* Adds a gentle curve to image corners */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  object-fit: contain;
-  /* Or object-fit: contain */
+    width: 100%;
+    height: 100%; /* Example - adjust slide height */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 7%;
 }
 
 /* about-mission*/

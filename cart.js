@@ -20,7 +20,18 @@ $(document).ready(function() {
 
     $('.add-to-cart').click(function() {
         if (!isLoggedIn()) { // Assuming you have an 'isLoggedIn' function
-            alert("Please log in to add items to your cart.");
+            Swal.fire({
+                icon: 'info',
+                title: 'Login Required',
+                text: 'Please login or create an account to add items to your cart.',
+                showCancelButton: true,
+                confirmButtonText: 'Login',
+                cancelButtonText: 'Continue Shopping'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'login.php'; // Redirect to login page
+                }
+            });
             return; // Stop the button's default action
         }
 
