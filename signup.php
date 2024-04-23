@@ -69,6 +69,23 @@ include ('connection.php');
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE username = ? AND uid <> ?");
+    $stmt->bind_param("si", $username, $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count = $result->fetch_row()[0];
+
+    if ($count > 0) { // Duplicate username found 
+        echo "<script>
+              Swal.fire({
+                 icon: 'error',
+                 title: 'Username Unavailable',
+                 text: 'The chosen username is already taken. Please select a different one.'
+              });
+              </script>"; 
+        exit(); 
+    }
+
     // Check for Existing Email and Username
     $query = "SELECT * FROM user WHERE email = ? OR username = ?";
     $stmt = mysqli_prepare($conn, $query);

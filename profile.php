@@ -23,10 +23,9 @@ if ($result->num_rows !== 1) {
 }
 
 $user = $result->fetch_assoc();
-
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -79,7 +78,7 @@ $user = $result->fetch_assoc();
                 <label for="confirmPassword">Confirm New Password:</label>
                 <input type="password" id="confirm_password" name="confirm_password"><br><br>
 
-                <button type="submit">Update Profile</button>
+                <button type="submit" class="update-profile">Update Profile</button>
             </form>
         </section>
     </section>
@@ -126,7 +125,7 @@ $user = $result->fetch_assoc();
 
             if ($stmt->execute()) {
                 echo
-                "<script>
+                    "<script>
                 Swal.fire({
                    icon: 'success',
                    title: 'Details updated successfully!',

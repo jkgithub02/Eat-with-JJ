@@ -692,6 +692,39 @@ tr:hover{
  background-color: #f8f8f82a; 
 }
 
+
+.checkout-button,
+.add-to-cart,
+.save-order,
+.place-order {
+  background-color: #4CAF50; /* Example: Green color */
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none; /* Remove underline if present */
+  border: none;          /* Remove default border */
+  border-radius: 5px;    /* Slightly rounded corners */
+  cursor: pointer;       /* Indicate clickability */
+  transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+
+.checkout-button,
+.add-to-cart,
+.save-order,
+.place-order:hover {
+  background-color: #3e8e41; /* Slightly darker green on hover */
+}
+
+.quantity {
+  padding: 8px 12px;         
+  border: 1px solid #ccc;    
+  border-radius: 5px;       
+  text-align: center;  
+  width: 50px;            /* Adjust the width as desired */
+  font-weight: bold;      /* Make the text bold */  /* Make the text bold */
+}
+
 .add-container {
   display: flex;
   justify-content: center;
