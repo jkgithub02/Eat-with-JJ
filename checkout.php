@@ -50,7 +50,7 @@ $user = $result->fetch_assoc();
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="pagewithbg">
     <?php include ('header.php'); ?>
     <main>
         <div class="cartheading">

@@ -56,7 +56,7 @@ $user = $result->fetch_assoc();
     </div>
     <section class="form-wrapper">
         <section class="form-container">
-            <form method="POST" action="profile.php" onsubmit="return validatePassword()">
+            <form method="POST" action="profile.php" onsubmit="return validateProfile()">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>"
                     required><br><br>
@@ -126,10 +126,16 @@ $user = $result->fetch_assoc();
 
             if ($stmt->execute()) {
                 echo
-                    "<script>
-                alert('Details updated successfully!');
-                window.location.href = 'menu.php';
-            </script>";
+                "<script>
+                Swal.fire({
+                   icon: 'success',
+                   title: 'Details updated successfully!',
+                   showConfirmButton: false, 
+                   timer: 1500 // Auto-close after 1.5 seconds
+                }).then(() => {
+                   window.location.href = 'menu.php'; // Redirect if successful
+                });
+          </script>";
                 exit();
             } else {
                 $errorMessage = "Error updating profile. Please try again.";

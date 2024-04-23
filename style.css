@@ -9,6 +9,14 @@ body {
   line-height: 1.6;
 }
 
+body.menupage { 
+  background-image: url('websiteimg/indoor.jpeg'); /* Replace with your image path */
+  background-size: cover; /* Make the image cover the whole screen */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  background-attachment: fixed; /* Keep image fixed on scroll */
+}
+
+
 .pagewithbg {
   font-family: sans-serif;
   margin: 0;
@@ -514,6 +522,7 @@ p::after {
   border: 3px solid #ddd;
   text-align: center;
   border-radius: 5%;
+  background-color: #1a1a1a;
 }
 
 .menu-item h3 {
@@ -598,6 +607,7 @@ p::after {
   border: 3px solid white;
   margin: 2% 35%;
   padding: 3px;
+  background-color: #1a1a1a;
 }
 
 .carttable{
@@ -611,6 +621,7 @@ p::after {
 .carttable table {
   border-collapse: collapse;
   margin: 20px auto;
+  background-color: #1a1a1a;
 }
 
 .carttable th,

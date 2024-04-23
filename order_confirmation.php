@@ -50,7 +50,7 @@ $userDetails = json_encode($_SESSION['user_id']); // Assuming user data is in se
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="pagewithbg">
     <?php include ('header.php'); ?>
     <div class="cartheading">
         <h1>Thank you for your order!</h1>

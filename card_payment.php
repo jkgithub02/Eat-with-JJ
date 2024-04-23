@@ -45,16 +45,20 @@ $user = $result->fetch_assoc();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Eat with JJ - Checkout</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="card_checkout.js"></script>
 </head>
 
-<body>
+<body class="pagewithbg">
     <?php include ('header.php'); ?>
     <main>
         <div class="cartheading">
             <h1>Card Payment</h1>
         </div>
         <div class="form-wrap">
-            <form method="POST" action="order_confirmation.php" id="cardPaymentForm">
+            <form method="POST" action="order_confirmation.php" id="cardPaymentForm"
+                onsubmit="return validatePaymentDetails()">
 
                 <label for="cardNumber">Card Number:</label>
                 <input type="tel" id="cardNumber" name="cardNumber" inputmode="numeric" pattern="[0-9\s]{13,19}"
@@ -76,6 +80,6 @@ $user = $result->fetch_assoc();
     var userId = <?php echo json_encode($user_id); ?>;
     var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
 </script>
-<script src="card_checkout.js"></script>
+
 
 </html>

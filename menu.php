@@ -23,7 +23,7 @@ include ('connection.php');
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="menupage">
 
     <?php include ('header.php'); ?>
     <main>

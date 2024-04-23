@@ -60,16 +60,37 @@ include ('connection.php');
         $_SESSION['logged_in'] = true;  // Use the correct flag name
         $_SESSION['user_id'] = $row['uid']; // Store user ID in session
         $_SESSION['user_logged_in'] = true;
-        echo '1';
-        // Redirect to a logged-in area 
-        header("Location: menu.php"); // Assuming you want to redirect to home
+        echo
+          "<script>
+        Swal.fire({
+           icon: 'success',
+           title: 'Login Successful!',
+           showConfirmButton: false, 
+           timer: 1500 // Auto-close after 1.5 seconds
+        }).then(() => {
+           window.location.href = 'menu.php'; // Redirect if successful
+        });
+  </script>";
         exit();
 
       } else {
-        echo "Incorrect Username or Password";
+        echo "<script>                             
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Incorrect Username or Password'
+      });
+      </script>";
+
       }
     } else {
-      echo "Incorrect Username or Password";
+      echo "<script>                             
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Incorrect Username or Password'
+    });
+    </script>";
     }
 
     mysqli_close($conn); // Close the database connection 

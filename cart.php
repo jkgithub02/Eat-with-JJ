@@ -130,7 +130,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="pagewithbg">
     <?php include ('header.php'); ?>
     <main>
         <div class="cartheading">
@@ -175,7 +175,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['f
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3" class="text-right">Total:</td>
+                            <td colspan="4" class="text-right">Total:</td>
                             <td>RM<?= $total ?></td>
                         </tr>
                     </tfoot>
