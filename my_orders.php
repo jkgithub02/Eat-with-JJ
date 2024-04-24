@@ -1,4 +1,4 @@
-<?php
+<?php //original orders page
 include ('connection.php');
 session_start();
 
@@ -40,12 +40,12 @@ $resultCompleted = $stmt->get_result(); // Get the result
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
-                        <th>Food ID</th>
+                        <th>Time</th>
                         <th>Food ordered</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Time</th>
+                        <th>Total</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -55,10 +55,7 @@ $resultCompleted = $stmt->get_result(); // Get the result
                                 <?php echo $row['oid']; ?>
                             </td>
                             <td>
-                                <?php echo $row['uid']; ?>
-                            </td>
-                            <td>
-                                <?php echo $row['fid']; ?>
+                                <?php echo $row['date']; ?>
                             </td>
                             <td>
                                 <?php echo $row['foodname']; ?>
@@ -70,8 +67,10 @@ $resultCompleted = $stmt->get_result(); // Get the result
                                 <?php echo $row['price']; ?>
                             </td>
                             <td>
-                                <?php echo $row['date']; ?>
+                                <?php $totalPrice = $row['quantity'] * $row['price'];
+                                 echo number_format($totalPrice, 2); ?>
                             </td>
+
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
@@ -89,12 +88,11 @@ $resultCompleted = $stmt->get_result(); // Get the result
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
-                        <th>Food ID</th>
+                        <th>Time</th>
                         <th>Food ordered</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Time</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,10 +102,7 @@ $resultCompleted = $stmt->get_result(); // Get the result
                                 <?php echo $row['oid']; ?>
                             </td>
                             <td>
-                                <?php echo $row['uid']; ?>
-                            </td>
-                            <td>
-                                <?php echo $row['fid']; ?>
+                                <?php echo $row['date']; ?>
                             </td>
                             <td>
                                 <?php echo $row['foodname']; ?>
@@ -119,8 +114,10 @@ $resultCompleted = $stmt->get_result(); // Get the result
                                 <?php echo $row['price']; ?>
                             </td>
                             <td>
-                                <?php echo $row['date']; ?>
+                                <?php $totalPrice = $row['quantity'] * $row['price'];
+                                echo number_format($totalPrice, 2); ?>
                             </td>
+
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
