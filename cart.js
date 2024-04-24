@@ -1,4 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Cart Functionality
 
 $(document).ready(function() {
@@ -104,15 +103,10 @@ $(document).ready(function() {
             type: "GET", // Use GET for addToCart operation
             data: { fid: fid, quantity: quantity, action: 'add' },
             success: function(response) {
-                // Optionally, provide feedback for successful addition
-                // alert("Item added to cart!");
                 Swal.fire({
                     title: "Item has been successfully added to cart!",
-                    // text: "That thing is still around?",
                     icon: "success"
                 });
-
-                // ... (Any further actions you want to execute)
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error("Error: " + textStatus + ", " + errorThrown);
@@ -135,7 +129,5 @@ $(document).ready(function() {
         return loggedIn;
     }
 });
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

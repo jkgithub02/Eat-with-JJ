@@ -34,7 +34,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_GET['fid'])) {
         $itemFound = false;
         for ($i = 0; $i < count($_SESSION['cart']); $i++) {
             if ($_SESSION['cart'][$i]['fid'] == $fid) {
-                $_SESSION['cart'][$i]['quantity']++;
+                $_SESSION['cart'][$i]['quantity'] += $quantity;
                 $itemFound = true;
                 break;
             }
