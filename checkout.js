@@ -2,31 +2,32 @@
 // Get the button element
 const saveButton = document.getElementById('save-order-details');
 
-// Add click event listener 
+// Attach an event listener to the button, executing the 'saveOrderDetailsLocally' function when it's clicked.
 saveButton.addEventListener('click', saveOrderDetailsLocally);
 
-// Inside your existing 'save-order-details' button click handler
+// **Saving Order Details (Locally)**
 function saveOrderDetailsLocally() {
+    // Create an object to hold the order information
     const orderData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    address: document.getElementById('address').value 
+    name: document.getElementById('name').value, //name 
+    email: document.getElementById('email').value, //email
+    phone: document.getElementById('phone').value, //phone
+    address: document.getElementById('address').value //address
     };
 
     // Store in local storage
     localStorage.setItem('orderDetails', JSON.stringify(orderData)); 
 
+    //sweet alert to show details saved
     Swal.fire({
         title: "Details have been successfully saved!",
-        // text: "That thing is still around?",
         icon: "success"
     });
     
-    // Show feedback message
+      // Locate the feedback element for displaying the save status
     const feedbackElement = document.getElementById('save-details-feedback');
     feedbackElement.textContent = "Details Saved!";
-    feedbackElement.style.color = "green"; // Optional: style for success
+    feedbackElement.style.color = "green"; // Style the feedback text as green
 
     // Clear feedback after a few seconds
     setTimeout(function() {
@@ -47,49 +48,50 @@ function loadOrderDetails() {
     }
 }  
 
-
-
-
+//order button handler
 const placeOrderButton = document.getElementById('place-order-button');
 placeOrderButton.addEventListener('click', function() {
     saveOrderDetailsLocally();
     submitOrder();
 });
 
-
+//submit order function
 function submitOrder() {
     const orderItems = cartItems.map(item => ({
-        fid: item.fid,
-        foodname: item.foodname,
-        quantity: item.quantity,
-        price: item.price
+        fid: item.fid, //food id
+        foodname: item.foodname, //food name
+        quantity: item.quantity, //quantity
+        price: item.price //price
     }));
 
+    //order details
     const orderData = {
-        userId: userId, // Assuming `userId` variable exists
-        name: document.getElementById('name').value, 
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        address: document.getElementById('address').value,
-        orderItems: orderItems,
-        date: calculateOrderDate(),
+        userId: userId, // userid
+        name: document.getElementById('name').value, //name
+        email: document.getElementById('email').value, //email
+        phone: document.getElementById('phone').value, //phone
+        address: document.getElementById('address').value, //address
+        orderItems: orderItems, //get order items 
+        date: calculateOrderDate(), //calculate date
         orderPlaced: true // Mark the order as placed
     };
 
-    const paymentForm = document.getElementById('paymentForm');
+    const paymentForm = document.getElementById('paymentForm'); 
     const selectedPayment = document.querySelector('input[name="payment_method"]:checked').value;
 
     if (selectedPayment === "Credit/Debit Card") {
-        // paymentForm.action = "card_payment.php"; 
+        //redirect to card payment page
         window.location.href = "card_payment.php";
     } else if (selectedPayment === "Cash") {
-        fetch('process_order.php', { // Send to your PHP order processing script
+        //direct process order if cash is selected
+        fetch('process_order.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
         })
         .then(response => response.json())
         .then(data => {
+            //clear the cart if order successful
             if (data.success) {
                 clearCart();
                 window.location.href = "order_confirmation.php";
@@ -103,7 +105,7 @@ function submitOrder() {
 
 }
 
-// Helper to clear the cart
+// function to clear the cart
 function clearCart() {
     cartItems = []; // Reset the cartItems array
     localStorage.removeItem('cartItems');
@@ -117,17 +119,19 @@ function clearCart() {
        });
 }
 
+
+//function to calculate the order date and time
 function calculateOrderDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, '0'); 
-    const day = today.getDate().toString().padStart(2, '0');
+    const today = new Date(); //date
+    const year = today.getFullYear(); //year
+    const month = (today.getMonth() + 1).toString().padStart(2, '0'); //month
+    const day = today.getDate().toString().padStart(2, '0'); //day
 
-    const hours = today.getHours().toString().padStart(2, '0');
-    const minutes = today.getMinutes().toString().padStart(2, '0');
-    const seconds = today.getSeconds().toString().padStart(2, '0');
+    const hours = today.getHours().toString().padStart(2, '0'); //hour
+    const minutes = today.getMinutes().toString().padStart(2, '0'); //minute
+    const seconds = today.getSeconds().toString().padStart(2, '0'); //second
 
-    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; 
-    return formattedDateTime;
+    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; //format date and time
+    return formattedDateTime; //reutrn formatted time and date
 }
 

@@ -9,7 +9,7 @@ include ('../connection.php');
 
 // Check if a food ID is provided
 if (!isset($_GET['id'])) {
-    header('Location: edit_menu.php'); // Might want a more specific error message 
+    header('Location: edit_menu.php'); 
     exit();
 }
 
@@ -49,13 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (in_array($fileType, $allowTypes)) {
             // Upload file to server
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
-                // Update with NEW image
+                // Update with new image
                 $sql = "UPDATE food SET foodname = ?, description = ?, fcid = ?, price = ?, img = ? WHERE fid = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("ssisd", $foodName, $description, $fcid, $price, $imageName, $foodId);
 
                 if ($stmt->execute()) {
-                    // $successMessage = "Food item updated successfully!";
                     // Redirect with JavaScript - Include the pop-up message
                     echo
                         "<script>
@@ -64,12 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </script>";
                     exit();
                 } else {
+                    //error updating food
                     $errorMessage = "Error updating food item. Please try again.";
                 }
             } else {
+                //error uploading image
                 $errorMessage = "Error uploading image.";
             }
         } else {
+            //image format incorrect
             $errorMessage = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         }
     } else if (!empty($foodName) && !empty($description) && !empty($fcid)) {
@@ -79,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ssidi", $foodName, $description, $fcid, $price, $foodId);
 
         if ($stmt->execute()) {
+            // javascript to redirect
             echo
                 "<script>
                         alert('Food item update successfully!');
@@ -99,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <title>Edit Food Item</title>
+    <!-- css admin  -->
     <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -119,21 +123,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <section class="form-wrapper">
         <section class="form-container">
+            <!-- form to update food details  -->
             <form method="POST" action="edit_food.php?id=<?php echo $food['fid']; ?>" enctype="multipart/form-data">
+                <!-- food name  -->
                 <label for="foodname">Food Name:</label>
+                <!-- display original food name  -->
                 <input type="text" id="foodname" name="foodname"
                     value="<?php echo htmlspecialchars($food['foodname']); ?>" required><br><br>
 
+                <!-- description  -->
                 <label for="description">Description:</label>
+                <!-- display original description  -->
                 <textarea id="description" name="description"
                     required><?php echo htmlspecialchars($food['description']); ?></textarea><br><br>
 
+                <!-- food category  -->
                 <label for="fcid">Food Category:</label>
+                <!-- selection menu for food category -->
                 <select id="fcid" name="fcid" required>
                     <?php
+                    // sql to get food categories id and their names 
                     $sql = "SELECT fcid, catname FROM foodcat";
                     $result = $conn->query($sql);
-
+                    // display food categories and their names
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $selected = ($row['fcid'] == $food['fcid']) ? 'selected' : ''; // Mark existing category as selected
@@ -145,11 +157,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ?>
                 </select><br><br>
 
+                <!-- price  -->
                 <label for="price">Price:</label>
+                <!-- set minimum value for price as 0.01 -->
                 <input type="number" id="price" name="price" min="0.01" step="0.01"
                     value="<?php echo $food['price']; ?>" required><br><br>
 
-                <label for="image">Image:</label>
+                <!-- image upload -->
+                <label for="image">Image:</label>z
+                <!-- accept file upload (but format restricted in PHP code above) -->
                 <input type="file" id="image" name="image" accept="image/*"><br><br>
                 <p>Current Image:
                     <?php echo $food['img']; ?>

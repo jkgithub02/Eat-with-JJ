@@ -1,5 +1,5 @@
 <?php
 session_start(); 
+//clears the cart
 unset($_SESSION['cart']); 
-// Optionally return some success indication if needed
 ?>

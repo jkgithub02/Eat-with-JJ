@@ -1,32 +1,33 @@
 <?php
 // Database connection (replace with your connection details)
 session_start();
-// error_reporting(0);
 include ('connection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eat with JJ - Home</title>
+  <!-- css  -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <?php include ('header.php'); ?>
   <main>
+    <!-- showing content  -->
     <section id="hero">
       <div class="motto-container">
         <h2>"Eating with JJ is not just about the food, it's about the experience."</h2>
       </div>
     </section>
-
+    <!-- heading for carousel  -->
     <div class="heading-container">
       <h3>Have a look through our Chef's recommended dishes!</h3>
     </div>
+    <!-- carousel containers  -->
     <div class="carousels-container">
       <div class="carousel">
         <ul class="carousel-slides">
@@ -44,7 +45,7 @@ include ('connection.php');
       </div>
     </div>
 
-
+    <!-- customer testimonial content  -->
     <div class="testimonials-wrapper">
       <section id="testimonials" class="testimonials">
         <h2>What Our Customers Say</h2>
@@ -61,14 +62,18 @@ include ('connection.php');
 
 
   </main>
+  <!-- javascript for sliding carousel  -->
   <script>
+    // get all carousel in the page 
     const carousels = document.querySelectorAll('.carousel');
 
+    // use a loop to obtain slides and perform automatic sliding
     carousels.forEach((carousel, index) => {
       const slides = carousel.querySelector('.carousel-slides');
       let currentSlide = 0;
       const slideWidth = carousel.querySelector('.carousel-slide').offsetWidth;
 
+      //change slide images 
       setInterval(() => {
         currentSlide++;
         if (currentSlide >= slides.children.length) currentSlide = 0;

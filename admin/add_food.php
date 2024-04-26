@@ -1,10 +1,10 @@
 <?php
+//start session and check if admin is logged in
 session_start();
 if (!isset($_SESSION['admin_logged_in'])) {
     header('Location: index.php');
     exit();
 }
-
 include ('../connection.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Image Upload
     $targetDir = "../assets/"; // Directory to store images
-    $imageName = basename($_FILES["image"]["name"]);
+    $imageName = basename($_FILES["image"]["name"]); // Get image name
     $targetFilePath = $targetDir . $imageName;
-    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); //get image file extension
 
     if (!empty($foodName) && !empty($description) && !empty($fcid) && !empty($imageName)) {
         // Allow certain file formats
@@ -30,9 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql = "INSERT INTO food (fcid, foodname, description, price, img)
                         VALUES (?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("issds", $fcid, $foodName, $description, $price, $imageName);
+                $stmt->bind_param("issds", $fcid, $foodName, $description, $price, $imageName); //bind input values
 
                 if ($stmt->execute()) {
+                    //alert successful and redirect back to edit menu page
                     echo 
                     "<script>
                         alert('Food item updated successfully!');
@@ -40,15 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </script>";
                     exit();
                 } else {
+                    // error in inserting food item
                     $errorMessage = "Error adding food item. Please try again.";
                 }
             } else {
+                // image upload failed
                 $errorMessage = "Error uploading image.";
             }
         } else {
+            // image format incorrect
             $errorMessage = "Only JPG, JPEG, PNG & GIF files are allowed.";
         }
     } else {
+        // did not enter all fields
         $errorMessage = "All fields are required!";
     }
 }
@@ -59,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <title>Add Food Item</title>
+    <!-- css admin  -->
     <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -79,19 +85,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <section class="form-wrapper">
         <section class="form-container">
+            <!-- form to add new food item  -->
             <form method="POST" action="add_food.php" enctype="multipart/form-data">
+                <!-- input food name  -->
                 <label for="foodname">Food Name:</label>
                 <input type="text" id="foodname" name="foodname" required><br><br>
 
+                <!-- input description  -->
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" required></textarea><br><br>
 
+                <!-- input food category  -->
                 <label for="fcid">Food Category:</label>
                 <select id="fcid" name="fcid" required>
                     <?php
                     $sql = "SELECT fcid, catname FROM foodcat";
                     $result = $conn->query($sql);
-
+                    
+                    //display food categories in drop down menu as names instead of numbers
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<option value='" . $row['fcid'] . "'>" . $row['catname'] . "</option>";
@@ -102,13 +113,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ?>
                 
                 </select><br><br>
-
+                
+                <!-- price input  -->
                 <label for="price">Price:</label>
                 <input type="number" id="price" name="price" min="0.01" step="0.01" required><br><br>
-
+                
+                <!-- image upload -->
                 <label for="image">Image:</label>
                 <input type="file" id="image" name="image" accept="image/*" required><br><br>
-
+                
+                <!-- submit button  -->
                 <button type="submit">Add Food Item</button>
             </form>
         </section>

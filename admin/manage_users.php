@@ -1,4 +1,5 @@
 <?php
+// start the session and checks if admin is logged in
 session_start();
 include ('../connection.php');
 if (!isset($_SESSION['admin_logged_in'])) {
@@ -6,8 +7,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     exit();
 }
 
-
-
+// delete button function
 if (isset($_GET['delete_id'])) {
     $id = (int) $_GET['delete_id']; // Sanitize ID
     $sql = "DELETE FROM user WHERE uid = ?";
@@ -30,11 +30,10 @@ $result = $conn->query($sql);
 
 <body>
     <?php include ('header.php'); ?>
-
     <h2>Users</h2>
-
     <?php if ($result->num_rows > 0): ?>
         <table>
+            <!-- table columns  -->
             <thead>
                 <tr>
                     <th>UID</th>
@@ -47,26 +46,34 @@ $result = $conn->query($sql);
                 </tr>
             </thead>
             <tbody>
+                <!-- fetch user details in database  -->
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
+                        <!-- user id  -->
                         <td>
                             <?php echo $row['uid']; ?>
                         </td>
+                        <!-- username -->
                         <td>
                             <?php echo $row['username']; ?>
                         </td>
+                        <!-- user full name -->
                         <td>
                             <?php echo $row['name']; ?>
                         </td>
+                        <!-- user email -->
                         <td>
                             <?php echo $row['email']; ?>
                         </td>
+                        <!-- user phone number -->
                         <td>
                             <?php echo $row['phone']; ?>
                         </td>
+                        <!-- user address -->
                         <td>
                             <?php echo $row['address']; ?>
                         </td>
+                        <!-- edit user and delete user buttons -->
                         <td>
                             <a href="edit_users.php?id=<?php echo $row['uid']; ?>" class="button">Edit</a>
                             <a href="?delete_id=<?php echo $row['uid']; ?>" class="button delete">Delete</a>
@@ -75,10 +82,12 @@ $result = $conn->query($sql);
                 <?php endwhile; ?>
             </tbody>
         </table>
+        <!-- if no users are found -->
     <?php else: ?>
         <p>No users found.</p>
     <?php endif; ?>
 
+    <!-- javascript for admins  -->
     <script src="admin.js"></script>
 
 </body>

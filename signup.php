@@ -1,34 +1,31 @@
 <?php
-// Database connection (replace with your connection details)
+// Database connection and start the session
 session_start();
-// error_reporting(0);
 include ('connection.php');
-
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eat with JJ - Sign Up</title>
+  <!-- css  -->
   <link rel="stylesheet" href="style.css">
+  <!-- javascript file and links  -->
   <script src='password.js'></script>
   <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
 
 <body class="pagewithbg">
+  <!-- header  -->
   <?php include ('header.php'); ?>
   <main>
     <section class="form-wrapper">
       <section class="form-container">
         <h2>Sign Up</h2>
-
+        <!-- sign up form  -->
         <form method="POST" action="signup.php" onsubmit="return validatePassword()">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
@@ -46,9 +43,6 @@ include ('connection.php');
           <input type="password" id="confirm_password" name="confirm_password" required>
           <button type="submit">Sign Up</button>
         </form>
-
-
-
       </section>
     </section>
   </main>
@@ -70,12 +64,13 @@ include ('connection.php');
     $confirm_password = $_POST['confirm_password'];
 
     $stmt = $conn->prepare("SELECT COUNT(*) FROM user WHERE username = ? AND uid <> ?");
-    $stmt->bind_param("si", $username, $userId);
+    $stmt->bind_param("si", $username, $userId); //bind username and user id
     $stmt->execute();
     $result = $stmt->get_result();
     $count = $result->fetch_row()[0];
 
     if ($count > 0) { // Duplicate username found 
+      //sweet alert to warn duplicate username
       echo "<script>
               Swal.fire({
                  icon: 'error',
@@ -97,6 +92,7 @@ include ('connection.php');
     $result = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($result) > 0) {
+      //sweet alert to inform duplicate email or username
       echo "<script>
             Swal.fire({
                 icon: 'error',
@@ -129,6 +125,8 @@ include ('connection.php');
     // Bind parameters ('ssss' indicates string types)
     mysqli_stmt_bind_param($stmt, "ssssss", $username, $name, $phone, $address, $email, $hashed_password);
 
+
+    //successful sign up with sweet alert
     if (mysqli_stmt_execute($stmt)) {
       echo "<script>
       Swal.fire({
@@ -159,7 +157,7 @@ include ('connection.php');
   }
   ?>
 
-
+  <!-- footer  -->
   <footer>
     <p>&copy; Eat with JJ 2024</p>
   </footer>

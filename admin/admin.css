@@ -112,10 +112,11 @@ main {
     justify-content: space-between;
 }
 
-
+/* welcome message for admin home page */
 .welcome-message {
     padding-top: 40px;
     display: flex;
+    /* center image and contents */
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -125,7 +126,8 @@ main {
 }
 
 .welcome-message img {
-    border-radius: 5%;
+    /* adjust border radius */
+    border-radius: 5%; 
 }
 
 .welcome-message p1 {
@@ -136,6 +138,7 @@ main {
     /* Animation details below */
 }
 
+/* marquee animation */
 @keyframes marquee {
     0% {
         transform: translate(0, 0);

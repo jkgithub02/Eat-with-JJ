@@ -49,6 +49,7 @@ CREATE TABLE food(
     FOREIGN KEY (fcid) REFERENCES foodcat(fcid)
 );
 
+--insert examples of food object items
 INSERT INTO food(fid, fcid, foodname, description, price, img) VALUES
 (1, 1, "Grilled Chicken Burger", "Lorem Ipsum", "10.00", "gc_burger.jpeg"),
 (2, 1, "Fried Chicken Burger", "Lorem Ipsum", "10.00", "fc_burger.jpeg"),

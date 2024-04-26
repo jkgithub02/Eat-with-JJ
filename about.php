@@ -1,8 +1,7 @@
 <?php
-    // Database connection (replace with your connection details)
-    session_start();
-    // error_reporting(0);
-    include ('connection.php');
+// Database connection
+session_start();
+include ('connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +15,11 @@
 </head>
 
 <body>
-    <?php include('header.php'); ?>  
+    <!-- header -->
+    <?php include ('header.php'); ?>
 
     <main>
-
+        <!-- showing content for about us-->
         <section id="mission">
             <div class="container">
                 <h2>Our Mission</h2>
@@ -31,6 +31,7 @@
             </div>
         </section>
 
+        <!-- showing content for team-->
         <section id="team">
             <div class="team-container">
                 <h2>Meet the Team</h2>
@@ -54,6 +55,8 @@
                 </div>
             </div>
         </section>
+
+        <!-- showing content for values-->
         <div class="values-wrapper">
             <section id="values">
                 <div class="container">
@@ -66,6 +69,7 @@
         </div>
     </main>
 
+    <!-- footer-->
     <footer>
         <p>&copy; Eat with JJ 2024</p>
     </footer>

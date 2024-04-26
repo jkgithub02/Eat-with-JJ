@@ -1,16 +1,13 @@
 <?php
 session_start();
 
-// Database Connection (replace with your credentials)
-include ('../connection.php'); // Assuming connection.php is in the root
+// Database Connection 
+include ('../connection.php'); 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    // 1. Input Validation (Sanitize inputs)
-    // ... (Prevent SQL injection, etc.)
-
-    // 2. Fetch Admin from Database
+    // Fetch Admin from Database
     $sql = "SELECT * FROM admin WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
@@ -20,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows === 1) {
         $admin = $result->fetch_assoc();
 
-        // 3. Password Verification
+        // Password Verification
         if (password_verify($password, $admin['password'])) {
             // Successful admin login
             $_SESSION['admin_logged_in'] = true;
@@ -44,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <title>Admin Login</title>
+    <!-- css for admin  -->
     <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -57,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php echo $errorMessage; ?>
                     </p>
                 <?php endif; ?>
-
+                <!-- admin login form  -->
                 <form method="POST">
                     <label for="username">Admin Username:</label>
                     <input type="text" id="username" name="username" required>

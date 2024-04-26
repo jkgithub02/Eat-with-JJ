@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
         ];  
     }
 } else {
-    // Handle the case where no order is found (you might want an error message here)
+    // Handle the case where no order is found (error message here)
 }
 
 // Close the database connection

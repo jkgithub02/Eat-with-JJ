@@ -16,13 +16,13 @@ if (empty($_SESSION['cart'])) {
     exit;
 }
 
-// Assuming you know the user's ID
-$user_id = $_SESSION['user_id'];  // (Or however you retrieve the user ID)
+// retrieve user id from session
+$user_id = $_SESSION['user_id'];  
 
 // Prepare the query
 $sql = "SELECT * FROM user WHERE uid = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $user_id);
+$stmt->bind_param('i', $user_id); //bind user id parameter
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -43,25 +43,31 @@ $user = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- javascript links  -->
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Eat with JJ - Checkout</title>
+    <!-- css  -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="pagewithbg">
+    <!-- header  -->
     <?php include ('header.php'); ?>
     <main>
+        <!-- div for title  -->
         <div class="cartheading">
             <h1>Checkout</h1>
         </div>
 
         <?php
+        // empty cart 
         if (empty($_SESSION['cart'])) {
             echo "<p>Your cart is empty.</p>";
         } else {
             ?>
+            <!-- cart table  -->
             <div class="carttable">
                 <table>
                     <thead>
@@ -74,7 +80,9 @@ $user = $result->fetch_assoc();
                     </thead>
                     <tbody>
                         <?php
+                        // calculate total 
                         $total = 0;
+                        //use a loop to retrieve item details
                         foreach ($_SESSION['cart'] as $item) {
                             $subtotal = $item['price'] * $item['quantity'];
                             $total += $subtotal;
@@ -89,6 +97,7 @@ $user = $result->fetch_assoc();
                     </tbody>
                     <tfoot>
                         <tr>
+                            <!-- column span for neater table view  -->
                             <td colspan="3" class="text-right">Total:</td>
                             <td>RM<?= $total ?></td>
                         </tr>
@@ -97,12 +106,15 @@ $user = $result->fetch_assoc();
             </div>
         <?php } ?>
     </main>
+    <!-- billing form details  -->
     <div class="cartheading">
         <h1>Billing Details</h1>
         <section class="form-wrapper">
             <section class="form-container">
+                <!-- form for billing details  -->
                 <form method="POST" action="checkout.php">
                     <label for="name">Full Name:</label>
+                    <!-- autofill original details from userid details for name email phone and address -->
                     <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user['name']); ?>"
                         required><br><br>
 
@@ -130,6 +142,7 @@ $user = $result->fetch_assoc();
     </div>
     <div class="cartheading">
         <h1>Payment Options</h1>
+        <!-- selection for payment method  (cash, credit/debit) -->
         <form id="paymentForm">
             <input type="radio" id="card" name="payment_method" value="Credit/Debit Card">
             <label for="html">Credit/Debit Card</label><br>
@@ -142,6 +155,7 @@ $user = $result->fetch_assoc();
         <p>&copy; Eat with JJ 2024</p>
     </footer>
     <script>
+        //convert values to json string format
         var userId = <?php echo json_encode($user_id); ?>;
         var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
     </script>

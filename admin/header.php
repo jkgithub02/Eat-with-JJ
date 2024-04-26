@@ -1,5 +1,7 @@
 <header>
+    <!-- header for admin  -->
     <h1>Eat with JJ: Admin Dashboard</h1>
+    <!-- navigation bar to other pages  -->
     <nav>
         <a href="admin.php" class="button-link">Home</a>
         <a href="edit_menu.php" class="button-link">Edit Menu</a>
