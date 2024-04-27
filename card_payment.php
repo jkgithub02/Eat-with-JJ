@@ -16,7 +16,7 @@ if (empty($_SESSION['cart'])) {
 }
 
 // retrieve user id from session
-$user_id = $_SESSION['user_id'];  
+$user_id = $_SESSION['user_id'];
 
 // prepare the query to get user details from database
 $sql = "SELECT * FROM user WHERE uid = ?";
@@ -60,8 +60,9 @@ $user = $result->fetch_assoc();
         <!-- div for card payment form -->
         <div class="form-wrap">
             <!-- card payment form -->
-            <form method="POST" action="order_confirmation.php" id="cardPaymentForm" onsubmit="return validatePaymentDetails()">
-            <!-- limit input length to 16 and only numnbers for card number -->
+            <form method="POST" action="order_confirmation.php" id="cardPaymentForm"
+                onsubmit="return validatePaymentDetails()">
+                <!-- limit input length to 16 and only numnbers for card number -->
                 <label for="cardNumber">Card Number:</label>
                 <input type="tel" id="cardNumber" name="cardNumber" inputmode="numeric" pattern="[0-9\s]{13,19}"
                     autocomplete="cc-number" maxlength="16" placeholder="xxxx xxxx xxxx xxxx" required>
@@ -79,11 +80,6 @@ $user = $result->fetch_assoc();
             </form>
         </div>
     </main>
-
-    <!-- sweet alert and javascript file src  -->
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script src="card_checkout.js"></script>
 </body>
 
 <!-- js script to encode userid and cart  -->
@@ -91,6 +87,10 @@ $user = $result->fetch_assoc();
     var userId = <?php echo json_encode($user_id); ?>;
     var cartItems = <?php echo json_encode($_SESSION['cart']); ?>;
 </script>
+<!-- sweet alert and javascript file src  -->
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script src="card_checkout.js"></script>
 
 
 </html>

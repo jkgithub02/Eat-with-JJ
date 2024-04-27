@@ -33,14 +33,13 @@ function submitOrder() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                clearCart(); //clears cart if order successful
                 window.location.href = "order_confirmation.php"; //redirection to order confirmation page
             } else {
                 alert("Error placing order: " + data.message); //failed to order
             }
         })
         .catch(error => console.error('Error submitting order:', error)); //catching the error when ordering
-
+    clearCart(); //clears cart if order successful
 }
 
 // clears the cart
