@@ -9,11 +9,21 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 // delete button function
 if (isset($_GET['delete_id'])) {
-    $id = (int) $_GET['delete_id']; // Sanitize ID
-    $sql = "DELETE FROM user WHERE uid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $id);
-    $stmt->execute();
+    $userId = (int) $_GET['delete_id'];
+
+    // delete orders related to the user first
+    $deleteOrdersSql = "DELETE FROM orders WHERE uid = ?";
+    $deleteOrdersStmt = $conn->prepare($deleteOrdersSql);
+    $deleteOrdersStmt->bind_param("i", $userId);
+    $deleteOrdersStmt->execute();
+    $deleteOrdersStmt->close();
+
+    // Now proceed with deleting the user
+    $deleteUserSql = "DELETE FROM user WHERE uid = ?";
+    $deleteUserStmt = $conn->prepare($deleteUserSql);
+    $deleteUserStmt->bind_param("i", $userId);
+    $deleteUserStmt->execute();
+    $deleteUserStmt->close();
 }
 
 // Fetch food items 
