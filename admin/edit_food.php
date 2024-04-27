@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Update with new image
                 $sql = "UPDATE food SET foodname = ?, description = ?, fcid = ?, price = ?, img = ? WHERE fid = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ssisd", $foodName, $description, $fcid, $price, $imageName, $foodId);
+                $stmt->bind_param("ssidsi", $foodName, $description, $fcid, $price, $imageName, $foodId);
 
                 if ($stmt->execute()) {
                     // Redirect with JavaScript - Include the pop-up message
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     value="<?php echo $food['price']; ?>" required><br><br>
 
                 <!-- image upload -->
-                <label for="image">Image:</label>z
+                <label for="image">Image:</label>
                 <!-- accept file upload (but format restricted in PHP code above) -->
                 <input type="file" id="image" name="image" accept="image/*"><br><br>
                 <p>Current Image:
